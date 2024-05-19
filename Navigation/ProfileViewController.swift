@@ -2,26 +2,40 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    // Создаем экземпляр ProfileHeaderView
-    let headerView = ProfileHeaderView()
+    private let headerView = ProfileHeaderView()
     
+    private let newButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("New Button", for: .normal)
+        button.backgroundColor = .systemBlue
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-    }
-    
-    private func setupView() {
-        // Устанавливаем серый фон
         view.backgroundColor = .lightGray
         
-        // Добавляем ProfileHeaderView как subview
         view.addSubview(headerView)
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+        view.addSubview(newButton)
         
-        // Задаем frame для headerView равный frame корневого view
-        headerView.frame = view.bounds
+        // Установить constraints для headerView
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            headerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            headerView.heightAnchor.constraint(equalToConstant: 220)
+        ])
+        
+        // Установить constraints для newButton
+        NSLayoutConstraint.activate([
+            newButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            newButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            newButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            newButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
 }

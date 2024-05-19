@@ -45,7 +45,7 @@ class ProfileHeaderView: UIView {
     let actionButton: UIButton = {
         let button = UIButton()
         button.setTitle("Set status", for: .normal)
-        button.backgroundColor = .blue
+        button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 8
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
