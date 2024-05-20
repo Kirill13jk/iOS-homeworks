@@ -1,9 +1,3 @@
-//
-//  SceneDelegate.swift
-//  Navigation
-//
-//  Created by prom1 on 25.04.2024.
-//
 
 import UIKit
 
@@ -15,28 +9,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         
-        //Создаем контроллеры для ленты и профиля пользователя
+        // Создаем контроллеры для ленты и профиля пользователя
         let feedViewController = FeedViewController()
-        let profileViewController = ProfileViewController()
         
-        //Создаем UINavigationController для каждого контроллера
+        // Создаем LogInViewController
+        let logInViewController = LogInViewController()
+        
+        // Создаем UINavigationController для LogInViewController
+        let logInNavigationController = UINavigationController(rootViewController: logInViewController)
+        
+        // Настраиваем Tab Bar Item для каждого UINavigationController
         let feedNavigationController = UINavigationController(rootViewController: feedViewController)
-        let profileNavigationController = UINavigationController(rootViewController: profileViewController)
+        feedNavigationController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "house"), selectedImage: nil)
+        logInNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), selectedImage: nil)
         
-        //Настраиваем Tab Bar Item для каждого UINavigationController
-        feedNavigationController.tabBarItem = UITabBarItem(title: "Лента", image: UIImage(systemName: "house"), selectedImage: nil)
-        profileNavigationController.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person"), selectedImage: nil)
-        
-        //Создаем и настраиваем UITabBarController
+        // Создаем и настраиваем UITabBarController
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [feedNavigationController, profileNavigationController]
+        tabBarController.viewControllers = [feedNavigationController, logInNavigationController]
         
         window.rootViewController = tabBarController
         self.window = window
         window.makeKeyAndVisible()
-        
-        
     }
+}
 
 
 
@@ -69,5 +64,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 
-}
+
 

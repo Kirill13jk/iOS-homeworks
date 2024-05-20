@@ -4,6 +4,7 @@ class FeedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         
         // Создание UIStackView
         let stackView = UIStackView()
