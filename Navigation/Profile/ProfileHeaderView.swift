@@ -68,6 +68,9 @@ class ProfileHeaderView: UIView {
     }
     
     private func setupViews() {
+        // Устанавливаем белый фон
+        backgroundColor = .white
+
         addSubview(profileImageView)
         addSubview(nameLabel)
         addSubview(bioLabel)
@@ -75,6 +78,7 @@ class ProfileHeaderView: UIView {
         addSubview(actionButton)
         
         NSLayoutConstraint.activate([
+            self.heightAnchor.constraint(equalToConstant: 250),
             profileImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             profileImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
             profileImageView.widthAnchor.constraint(equalToConstant: 100),

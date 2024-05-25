@@ -97,8 +97,7 @@ class LogInViewController: UIViewController {
     // MARK: - Actions
     @objc private func loginButtonTapped() {
         let profileViewController = ProfileViewController()
-        profileViewController.modalPresentationStyle = .fullScreen
-        present(profileViewController, animated: true, completion: nil)
+        navigationController?.pushViewController(profileViewController, animated: true)
     }
 
     @objc func willShowKeyboard(_ notification: Notification) {

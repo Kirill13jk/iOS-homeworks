@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "sunny_day.jpeg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
