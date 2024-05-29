@@ -16,7 +16,9 @@ class ProfileViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosCell")
     }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupTableHeaderView()
@@ -31,34 +33,52 @@ class ProfileViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
+    
     private func setupTableHeaderView() {
-        
+        tableView.tableHeaderView = profileHeaderView
     }
 }
 
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
-    }
-    
-    func tableView(_ tableVew: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostTableViewCell
-        else {
-            return UITableViewCell()
+        if section == 0 {
+            return 1
+        } else {
+            return posts.count
         }
-        let post = posts[indexPath.row]
-        cell.configure(with: post)
-        return cell
     }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "PhotosCell", for: indexPath) as? PhotosTableViewCell else {
+                return UITableViewCell()
+            }
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as? PostTableViewCell else {
+                return UITableViewCell()
+            }
+            let post = posts[indexPath.row]
+            cell.configure(with: post)
+            return cell
+        }
+    }
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        print("viewForHeaderInSection called")
-        
-        return profileHeaderView
+        if section == 0 {
+            return profileHeaderView
+        }
+        return nil
     }
-    
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return UITableView.automaticDimension
+        if section == 0 {
+            return UITableView.automaticDimension
+        }
+        return 0
     }
 }
-
