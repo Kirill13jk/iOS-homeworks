@@ -10,7 +10,7 @@ class ProfileHeaderView: UIView {
         imageView.layer.cornerRadius = 50
         imageView.backgroundColor = .lightGray
         imageView.layer.borderWidth = 3
-        imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.layer.borderColor = UIColor.black.cgColor
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isUserInteractionEnabled = true
@@ -37,6 +37,10 @@ class ProfileHeaderView: UIView {
     let statusTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter your status"
+        textField.layer.borderWidth = 2
+        textField.layer.borderColor = UIColor.black.cgColor
+        textField.layer.cornerRadius = 12
+        textField.layer.masksToBounds = true
         textField.borderStyle = .roundedRect
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
@@ -46,7 +50,7 @@ class ProfileHeaderView: UIView {
         let button = UIButton()
         button.setTitle("Set status", for: .normal)
         button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 8
+        button.layer.cornerRadius = 12
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -68,9 +72,6 @@ class ProfileHeaderView: UIView {
     }
     
     private func setupViews() {
-        // Устанавливаем белый фон
-        backgroundColor = .white
-
         addSubview(profileImageView)
         addSubview(nameLabel)
         addSubview(bioLabel)
@@ -78,7 +79,7 @@ class ProfileHeaderView: UIView {
         addSubview(actionButton)
         
         NSLayoutConstraint.activate([
-            self.heightAnchor.constraint(equalToConstant: 120),
+            self.heightAnchor.constraint(equalToConstant: 200),
             profileImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             profileImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
             profileImageView.widthAnchor.constraint(equalToConstant: 100),
@@ -90,9 +91,10 @@ class ProfileHeaderView: UIView {
             bioLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
             bioLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
             
+            statusTextField.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
             statusTextField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            statusTextField.topAnchor.constraint(equalTo: profileImageView.bottomAnchor, constant: 16),
-            statusTextField.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            statusTextField.topAnchor.constraint(equalTo: bioLabel.bottomAnchor, constant: 8),
+            statusTextField.heightAnchor.constraint(equalToConstant: 40),
             
             actionButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16),
             actionButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),

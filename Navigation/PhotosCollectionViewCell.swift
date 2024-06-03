@@ -15,8 +15,8 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         setupViews()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
         setupViews()
     }
     
@@ -30,7 +30,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    func configure(with image: UIImage) {
+    func configure(with image: UIImage?) {
         imageView.image = image
     }
 }
