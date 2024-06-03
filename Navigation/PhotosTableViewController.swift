@@ -8,14 +8,14 @@ class PhotosTableViewController: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2 // Пример, чтобы ячейка Photos была в отдельной секции
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 1 // Ячейка Photos
+            return 1
         }
-        return 10 // Пример других ячеек
+        return 10
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

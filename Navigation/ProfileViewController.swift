@@ -4,7 +4,6 @@ class ProfileViewController: UIViewController {
 
     private let tableView = UITableView()
     private let profileHeaderView = ProfileHeaderView()
-    private let posts: [Post] = [] // Массив с постами
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,13 +68,6 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
-            let photoGalleryVC = PhotosViewController()
-            navigationController?.pushViewController(photoGalleryVC, animated: true)
-        }
-    }
-
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             return profileHeaderView
@@ -89,4 +81,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
         }
         return 0
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            if indexPath.section == 0 {
+                let photoGalleryVC = PhotosViewController()
+                navigationController?.pushViewController(photoGalleryVC, animated: true)
+            }
+        }
 }

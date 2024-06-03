@@ -12,9 +12,9 @@ class PhotosTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let disclosureButton: UIButton = {
+    private let arrowImage: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        button.setImage(UIImage(systemName: "arrow.right"), for: .normal)
         button.tintColor = .gray
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -22,6 +22,7 @@ class PhotosTableViewCell: UITableViewCell {
     
     private let stackView: UIStackView = {
         let stackView = UIStackView()
+        stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -40,7 +41,7 @@ class PhotosTableViewCell: UITableViewCell {
     
     private func setupViews() {
         contentView.addSubview(titleLabel)
-        contentView.addSubview(disclosureButton)
+        contentView.addSubview(arrowImage)
         contentView.addSubview(stackView)
         
         for i in 1...4 {
@@ -61,14 +62,15 @@ class PhotosTableViewCell: UITableViewCell {
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             
-            disclosureButton.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
-            disclosureButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
+            arrowImage.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+            arrowImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             
             stackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
-            
+            stackView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width - 12*2 - 8*3) / 4),
+                                    
             contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200)
         ])
     }
