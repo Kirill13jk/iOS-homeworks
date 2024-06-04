@@ -71,7 +71,7 @@ class PhotosTableViewCell: UITableViewCell {
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             stackView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width - 12*2 - 8*3) / 4),
                                     
-            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200)
+            contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 160)
         ])
     }
 }

@@ -79,7 +79,7 @@ class ProfileHeaderView: UIView {
         addSubview(actionButton)
         
         NSLayoutConstraint.activate([
-            self.heightAnchor.constraint(equalToConstant: 200),
+            self.heightAnchor.constraint(equalToConstant: 100),
             profileImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             profileImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
             profileImageView.widthAnchor.constraint(equalToConstant: 100),
