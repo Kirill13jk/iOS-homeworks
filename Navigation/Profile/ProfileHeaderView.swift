@@ -1,7 +1,6 @@
 import UIKit
 
 class ProfileHeaderView: UIView {
-
     // UI elements
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -116,8 +115,7 @@ class ProfileHeaderView: UIView {
     }
     
     @objc private func profileImageViewTapped() {
-        statusText = statusTextField.text ?? ""
-        print("Status: \(status)")
+        NotificationCenter.default.post(name: NSNotification.Name("AvatarTapped"), object: profileImageView)
     }
     
     @objc private func buttonPressed() {
