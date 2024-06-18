@@ -1,4 +1,5 @@
 import UIKit
+import StorageService
 
 class ProfileViewController: UIViewController {
 
@@ -14,6 +15,12 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = .systemBackground
 
         view.addSubview(tableView)
+        
+        #if DEBUG
+        view.backgroundColor = .blue
+        #else
+        view.backgroundColor = .green
+        #endif
 
         setupTableViewConstraints()
 
