@@ -32,6 +32,9 @@
 		A2F341B82C2193ED00AD0882 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2F341A32C2193EC00AD0882 /* StorageService.framework */; };
 		A2F341B92C2193ED00AD0882 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A2F341A32C2193EC00AD0882 /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A2F341C12C21941400AD0882 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29285E22BF9F492000F1271 /* Post.swift */; };
+		A2F341C42C23287000AD0882 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A2F341C32C23287000AD0882 /* SnapKit */; };
+		A2F341C62C23287000AD0882 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = A2F341C52C23287000AD0882 /* SnapKit-Dynamic */; };
+		A2F341C92C232A3F00AD0882 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = A2F341C82C232A3F00AD0882 /* iOSIntPackage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +110,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2F341B82C2193ED00AD0882 /* StorageService.framework in Frameworks */,
+				A2F341C42C23287000AD0882 /* SnapKit in Frameworks */,
+				A2F341C62C23287000AD0882 /* SnapKit-Dynamic in Frameworks */,
+				A2F341C92C232A3F00AD0882 /* iOSIntPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,6 +235,11 @@
 				A2F341B72C2193ED00AD0882 /* PBXTargetDependency */,
 			);
 			name = Navigation;
+			packageProductDependencies = (
+				A2F341C32C23287000AD0882 /* SnapKit */,
+				A2F341C52C23287000AD0882 /* SnapKit-Dynamic */,
+				A2F341C82C232A3F00AD0882 /* iOSIntPackage */,
+			);
 			productName = Navigation;
 			productReference = A2D44FD72BF9E8BA00BBE32A /* Navigation.app */;
 			productType = "com.apple.product-type.application";
@@ -301,6 +312,10 @@
 				Base,
 			);
 			mainGroup = A2D44FCE2BF9E8BA00BBE32A;
+			packageReferences = (
+				A2F341C22C23230F00AD0882 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				A2F341C72C232A3F00AD0882 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
+			);
 			productRefGroup = A2D44FD82BF9E8BA00BBE32A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -738,6 +753,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A2F341C22C23230F00AD0882 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		A2F341C72C232A3F00AD0882 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TrueMax/iOSIntPackage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A2F341C32C23287000AD0882 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A2F341C22C23230F00AD0882 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		A2F341C52C23287000AD0882 /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A2F341C22C23230F00AD0882 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
+		};
+		A2F341C82C232A3F00AD0882 /* iOSIntPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A2F341C72C232A3F00AD0882 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
+			productName = iOSIntPackage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A2D44FCF2BF9E8BA00BBE32A /* Project object */;
 }

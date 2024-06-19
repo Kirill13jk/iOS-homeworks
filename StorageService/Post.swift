@@ -4,7 +4,7 @@ public struct Post {
    public let title: String
    public let author: String
    public let description: String
-   public let image: UIImage
+   public let image: UIImage?
    public let likes: Int
    public let views: Int
 }

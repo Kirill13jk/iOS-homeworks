@@ -1,5 +1,6 @@
 import UIKit
 import StorageService
+import iOSIntPackage
 
 class PostTableViewCell: UITableViewCell {
     let postTitleLabel = UILabel()
@@ -8,9 +9,6 @@ class PostTableViewCell: UITableViewCell {
     let postImageView = UIImageView()
     let postLikesLabel = UILabel()
     let postViewsLabel = UILabel()
-    
-
-
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -23,7 +21,6 @@ class PostTableViewCell: UITableViewCell {
     }
 
     private func setupCell() {
-        // Настройка UI элементов и добавление их в contentView
         postImageView.translatesAutoresizingMaskIntoConstraints = false
         postTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         postAuthorLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +35,6 @@ class PostTableViewCell: UITableViewCell {
         contentView.addSubview(postLikesLabel)
         contentView.addSubview(postViewsLabel)
 
-        // Установите констрейнты для элементов
         NSLayoutConstraint.activate([
             postImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             postImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
@@ -65,6 +61,7 @@ class PostTableViewCell: UITableViewCell {
             postViewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             postViewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
+
         postDescriptionLabel.textColor = UIColor.gray
     }
 
@@ -73,8 +70,20 @@ class PostTableViewCell: UITableViewCell {
         postAuthorLabel.text = "Author: \(post.author)"
         postDescriptionLabel.text = post.description
         postImageView.contentMode = .scaleAspectFit
-        postImageView.image = post.image
         postLikesLabel.text = "Likes: \(post.likes)"
         postViewsLabel.text = "Views: \(post.views)"
+
+        if let image = post.image {
+            applyFilter(to: image)
+        }
+    }
+
+    private func applyFilter(to image: UIImage) {
+        let processor = ImageProcessor()
+        processor.processImage(sourceImage: image, filter: .chrome, completion: { processedImage in
+            DispatchQueue.main.async {
+                self.postImageView.image = processedImage
+            }
+        })
     }
 }
