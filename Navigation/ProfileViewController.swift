@@ -9,10 +9,17 @@ class ProfileViewController: UIViewController {
     private let closeButton = UIButton(type: .system)
     private var avatarOriginalFrame: CGRect?
     private var enlargedAvatarImageView: UIImageView?
+    var user: User?
+    
+    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var fullNameLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        
+        setupProfile()
 
         view.addSubview(tableView)
         
@@ -30,6 +37,13 @@ class ProfileViewController: UIViewController {
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosCell")
 
         NotificationCenter.default.addObserver(self, selector: #selector(handleAvatarTapped(_:)), name: NSNotification.Name("AvatarTapped"), object: nil)
+    }
+    
+    private func setupProfile() {
+        guard let user = user else { return }
+        avatarImageView.image = user.avatar
+        fullNameLabel.text = user.fullName
+        statusLabel.text = user.status
     }
 
     override func viewDidLayoutSubviews() {

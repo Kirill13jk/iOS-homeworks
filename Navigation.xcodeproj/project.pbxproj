@@ -35,6 +35,10 @@
 		A2F341C42C23287000AD0882 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A2F341C32C23287000AD0882 /* SnapKit */; };
 		A2F341C62C23287000AD0882 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = A2F341C52C23287000AD0882 /* SnapKit-Dynamic */; };
 		A2F341C92C232A3F00AD0882 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = A2F341C82C232A3F00AD0882 /* iOSIntPackage */; };
+		A2F341CC2C2405A200AD0882 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F341CB2C2405A200AD0882 /* User.swift */; };
+		A2F341CE2C2405CB00AD0882 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F341CD2C2405CB00AD0882 /* UserService.swift */; };
+		A2F341D02C2405E900AD0882 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F341CF2C2405E900AD0882 /* CurrentUserService.swift */; };
+		A2F341D52C24212D00AD0882 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F341D42C24212D00AD0882 /* TestUserService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +106,10 @@
 		A2F341A62C2193ED00AD0882 /* StorageService.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = StorageService.docc; sourceTree = "<group>"; };
 		A2F341AC2C2193ED00AD0882 /* StorageServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StorageServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2F341B32C2193ED00AD0882 /* StorageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServiceTests.swift; sourceTree = "<group>"; };
+		A2F341CB2C2405A200AD0882 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A2F341CD2C2405CB00AD0882 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		A2F341CF2C2405E900AD0882 /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
+		A2F341D42C24212D00AD0882 /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +175,9 @@
 		A2D44FD92BF9E8BA00BBE32A /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				A2F341D32C24144700AD0882 /* Galery */,
+				A2F341D22C24142600AD0882 /* Post */,
+				A2F341D12C24069D00AD0882 /* User */,
 				A29285EC2BF9F55A000F1271 /* Profile */,
 				A2D44FDA2BF9E8BA00BBE32A /* AppDelegate.swift */,
 				A2D44FDC2BF9E8BA00BBE32A /* SceneDelegate.swift */,
@@ -175,15 +186,9 @@
 				A2D44FE32BF9E8BC00BBE32A /* Assets.xcassets */,
 				A2D44FE52BF9E8BC00BBE32A /* LaunchScreen.storyboard */,
 				A2D44FE82BF9E8BC00BBE32A /* Info.plist */,
-				A29285E42BF9F4C1000F1271 /* PostViewController.swift */,
 				A29285E62BF9F4E8000F1271 /* ProfileViewController.swift */,
 				A29285E82BF9F51C000F1271 /* FeedViewController.swift */,
 				A29285EA2BF9F543000F1271 /* InfoViewController.swift */,
-				A2B6180D2BFE623F004FAFBB /* PostTableViewCell.swift */,
-				A21CA7272C0C7303000144FC /* PhotosTableViewCell.swift */,
-				A263BAF22C0C739F005EDA68 /* PhotosViewController.swift */,
-				A263BAF42C0C73BE005EDA68 /* PhotosCollectionViewCell.swift */,
-				A263BAF82C0DE026005EDA68 /* PhotosTableViewController.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -204,6 +209,37 @@
 				A2F341B32C2193ED00AD0882 /* StorageServiceTests.swift */,
 			);
 			path = StorageServiceTests;
+			sourceTree = "<group>";
+		};
+		A2F341D12C24069D00AD0882 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				A2F341D42C24212D00AD0882 /* TestUserService.swift */,
+				A2F341CB2C2405A200AD0882 /* User.swift */,
+				A2F341CD2C2405CB00AD0882 /* UserService.swift */,
+				A2F341CF2C2405E900AD0882 /* CurrentUserService.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		A2F341D22C24142600AD0882 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				A29285E42BF9F4C1000F1271 /* PostViewController.swift */,
+				A2B6180D2BFE623F004FAFBB /* PostTableViewCell.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		A2F341D32C24144700AD0882 /* Galery */ = {
+			isa = PBXGroup;
+			children = (
+				A21CA7272C0C7303000144FC /* PhotosTableViewCell.swift */,
+				A263BAF22C0C739F005EDA68 /* PhotosViewController.swift */,
+				A263BAF42C0C73BE005EDA68 /* PhotosCollectionViewCell.swift */,
+				A263BAF82C0DE026005EDA68 /* PhotosTableViewController.swift */,
+			);
+			path = Galery;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -363,10 +399,14 @@
 				A2D44FDF2BF9E8BA00BBE32A /* ViewController.swift in Sources */,
 				A2D44FDB2BF9E8BA00BBE32A /* AppDelegate.swift in Sources */,
 				A2D44FDD2BF9E8BA00BBE32A /* SceneDelegate.swift in Sources */,
+				A2F341CC2C2405A200AD0882 /* User.swift in Sources */,
 				A29285EE2BF9F57D000F1271 /* ProfileHeaderView.swift in Sources */,
+				A2F341CE2C2405CB00AD0882 /* UserService.swift in Sources */,
 				A29285E52BF9F4C1000F1271 /* PostViewController.swift in Sources */,
 				A29285EB2BF9F543000F1271 /* InfoViewController.swift in Sources */,
 				A2B618062BFA1823004FAFBB /* LogInViewController.swift in Sources */,
+				A2F341D02C2405E900AD0882 /* CurrentUserService.swift in Sources */,
+				A2F341D52C24212D00AD0882 /* TestUserService.swift in Sources */,
 				A21CA7282C0C7303000144FC /* PhotosTableViewCell.swift in Sources */,
 				A2B6180C2BFE5DA3004FAFBB /* ProfileTableHeaderView.swift in Sources */,
 				A263BAF52C0C73BE005EDA68 /* PhotosCollectionViewCell.swift in Sources */,

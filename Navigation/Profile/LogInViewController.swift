@@ -1,6 +1,10 @@
 import UIKit
 
 class LogInViewController: UIViewController {
+    @IBOutlet weak var loginTextField: UITextField!
+    @IBOutlet weak var errorLabel: UILabel!
+
+    var userService: UserService!
 
     // MARK: - UI Elements
     private lazy var scrollView: UIScrollView = {
@@ -72,13 +76,20 @@ class LogInViewController: UIViewController {
         if let bluePixel = UIImage(named: "blue_pixel") {
             button.setBackgroundImage(bluePixel.stretchableImage(withLeftCapWidth: 0, topCapHeight: 0), for: .normal)
         }
-        button.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(loginButtonTapped(_:)), for: .touchUpInside)
         return button
     }()
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        #if DEBUG
+        userService = TestUserService()
+        #else
+        userService = CurrentUserService(user: User(login: "realuser", fullName: "Real User", avatar: UIImage(named: "avatar") ?? UIImage(), status: "Real status"))
+        #endif
+
         setupView()
         setupConstraints()
         setupKeyboardObservers()
@@ -95,9 +106,15 @@ class LogInViewController: UIViewController {
     }
 
     // MARK: - Actions
-    @objc private func loginButtonTapped() {
-        let profileViewController = ProfileViewController()
-        navigationController?.pushViewController(profileViewController, animated: true)
+    @objc private func loginButtonTapped(_ sender: UIButton) {
+        guard let login = loginTextField.text else { return }
+        if let user = userService.getUser(login: login) {
+            let profileVC = ProfileViewController()
+            profileVC.user = user
+            navigationController?.pushViewController(profileVC, animated: true)
+        } else {
+            errorLabel.text = "Invalid login credentials"
+        }
     }
 
     @objc func willShowKeyboard(_ notification: Notification) {
