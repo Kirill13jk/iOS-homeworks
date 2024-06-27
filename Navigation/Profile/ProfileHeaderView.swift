@@ -12,7 +12,6 @@ class ProfileHeaderView: UIView {
         imageView.layer.borderWidth = 3
         imageView.layer.borderColor = UIColor.black.cgColor
         imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isUserInteractionEnabled = true
         return imageView
     }()
@@ -21,7 +20,6 @@ class ProfileHeaderView: UIView {
         let label = UILabel()
         label.text = "Hipster Cat"
         label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -30,7 +28,6 @@ class ProfileHeaderView: UIView {
         label.text = "Listening to music"
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .gray
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -42,7 +39,6 @@ class ProfileHeaderView: UIView {
         textField.layer.cornerRadius = 12
         textField.layer.masksToBounds = true
         textField.borderStyle = .roundedRect
-        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
@@ -51,7 +47,6 @@ class ProfileHeaderView: UIView {
         button.setTitle("Set status", for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 12
-        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -78,29 +73,34 @@ class ProfileHeaderView: UIView {
         addSubview(statusTextField)
         addSubview(actionButton)
         
-        NSLayoutConstraint.activate([
-            self.heightAnchor.constraint(equalToConstant: 100),
-            profileImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            profileImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-            profileImageView.widthAnchor.constraint(equalToConstant: 100),
-            profileImageView.heightAnchor.constraint(equalToConstant: 100),
-            
-            nameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
-            nameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
-            
-            bioLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
-            bioLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
-            
-            statusTextField.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 16),
-            statusTextField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            statusTextField.topAnchor.constraint(equalTo: bioLabel.bottomAnchor, constant: 8),
-            statusTextField.heightAnchor.constraint(equalToConstant: 40),
-            
-            actionButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16),
-            actionButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            actionButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            actionButton.heightAnchor.constraint(equalToConstant: 50)
-        ])
+        profileImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(16)
+            make.leading.equalToSuperview().offset(20)
+            make.size.equalTo(CGSize(width: 100, height: 100))
+        }
+        
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(27)
+            make.leading.equalTo(profileImageView.snp.trailing).offset(16)
+        }
+        
+        bioLabel.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom).offset(8)
+            make.leading.equalTo(profileImageView.snp.trailing).offset(16)
+        }
+        
+        statusTextField.snp.makeConstraints { make in
+            make.top.equalTo(bioLabel.snp.bottom).offset(8)
+            make.leading.equalTo(profileImageView.snp.trailing).offset(16)
+            make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(40)
+        }
+        
+        actionButton.snp.makeConstraints { make in
+            make.top.equalTo(statusTextField.snp.bottom).offset(16)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(50)
+        }
         
         // Add action for button
         actionButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
