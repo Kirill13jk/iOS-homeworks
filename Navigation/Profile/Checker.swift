@@ -2,19 +2,19 @@ import UIKit
 
 // Синглтон Checker
 class Checker {
-    // Приватные свойства login и password
-    private let login = "admin"
-    private let password = "password"
+    private let login = "Admin" // Ожидаемый логин
+    private let password = "Password" // Ожидаемый пароль
 
-    // Создаем статичную переменную для синглтона
-    static let shared = Checker()
+    static let shared = Checker() // Синглтон
 
-    // Приватный инициализатор, чтобы предотвратить создание новых экземпляров
-    private init() {}
+    private init() {} // Приватный инициализатор
 
-    // Метод проверки логина и пароля
+    // Метод для проверки логина и пароля
     func check(login: String, password: String) -> Bool {
-        return self.login == login && self.password == password
+        // Проверяем логин и пароль без учета регистра
+        return self.login.caseInsensitiveCompare(login) == .orderedSame &&
+               self.password.caseInsensitiveCompare(password) == .orderedSame
     }
 }
+
 

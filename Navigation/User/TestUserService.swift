@@ -1,13 +1,16 @@
 import UIKit
 
+// Тестовый сервис для получения данных пользователя
 class TestUserService: UserService {
-    private var testUser: User
-
-    init() {
-        self.testUser = User(login: "testuser", fullName: "Test User", avatar: UIImage(named: "test_avatar") ?? UIImage(), status: "Test status")
-    }
-
+    // Массив пользователей, используемый для тестирования
+    private let users = [
+        User(login: "admin", fullName: "Admin User", avatar: UIImage(named: "avatar") ?? UIImage(), status: "Admin status")
+    ]
+    
+    // Метод для получения пользователя по логину
     func getUser(login: String) -> User? {
-        return testUser.login == login ? testUser : nil
+        // Возвращаем первого пользователя, у которого логин совпадает с запрашиваемым без учета регистра
+        return users.first { $0.login.caseInsensitiveCompare(login) == .orderedSame }
     }
 }
+
