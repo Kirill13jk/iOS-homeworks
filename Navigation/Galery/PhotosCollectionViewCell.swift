@@ -1,14 +1,9 @@
 import UIKit
 
+// Класс ячейки для отображения фото в коллекции
 class PhotosCollectionViewCell: UICollectionViewCell {
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Photos gallery"
-        label.font = UIFont.boldSystemFont(ofSize: 24)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-
+    
+    // Создаем UIImageView для отображения изображения
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -17,20 +12,24 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
+    // Инициализация при создании ячейки программно
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupViews()
+        setupViews() // Настраиваем вид ячейки
     }
     
+    // Инициализация при создании ячейки из storyboard или xib
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupViews()
+        setupViews() // Настраиваем вид ячейки
     }
     
+    // Метод для настройки вида ячейки
     private func setupViews() {
-        contentView.addSubview(imageView)
+        contentView.addSubview(imageView) // Добавляем imageView в contentView ячейки
+        
+        // Устанавливаем констрейнты для imageView
         NSLayoutConstraint.activate([
-            
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -38,7 +37,8 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         ])
     }
     
+    // Метод для конфигурации ячейки с изображением
     func configure(with image: UIImage?) {
-        imageView.image = image
+        imageView.image = image // Устанавливаем изображение в imageView
     }
 }
