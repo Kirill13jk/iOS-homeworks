@@ -53,7 +53,7 @@ class PhotosViewController: UIViewController, ImageLibrarySubscriber {
         // Передаем пользовательские изображения
         let userImages: [UIImage] = loadUserImages()
         // Проверка, что все 20 изображений загружены
-        assert(userImages.count == 20, "Должно быть загружено 20 изображений, но загружено \(userImages.count)")
+        assert(userImages.count == 20, "\(userImages.count)")
         imagePublisher?.addImagesWithTimer(time: 0.5, repeat: userImages.count, userImages: userImages)
     }
     
@@ -71,8 +71,11 @@ class PhotosViewController: UIViewController, ImageLibrarySubscriber {
     private func loadUserImages() -> [UIImage] {
         var images = [UIImage]()
         for i in 1...20 {
-            if let image = UIImage(named: "photo\(i)") {
+            let imageName = "photo\(i)"
+            if let image = UIImage(named: imageName) {
                 images.append(image)
+            } else {
+                print("Error: Image \(imageName) not found")
             }
         }
         return images
