@@ -5,8 +5,8 @@ class ProfileHeaderView: UIView {
     // UI elements
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "profile_avatar")
-        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "profile_avatar") // Устанавливаем изображение
+        imageView.contentMode = .scaleAspectFit // Режим контента
         imageView.layer.cornerRadius = 50
         imageView.backgroundColor = .lightGray
         imageView.layer.borderWidth = 3
@@ -26,8 +26,8 @@ class ProfileHeaderView: UIView {
     let bioLabel: UILabel = {
         let label = UILabel()
         label.text = "Listening to music"
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.textColor = .gray
+        label.font = UIFont.systemFont(ofSize: 16) // Шриф текста
+        label.textColor = .gray // Цвет текста
         return label
     }()
     
@@ -35,18 +35,21 @@ class ProfileHeaderView: UIView {
         let textField = UITextField()
         textField.placeholder = "Enter your status"
         textField.layer.borderWidth = 2
-        textField.layer.borderColor = UIColor.black.cgColor
-        textField.layer.cornerRadius = 12
-        textField.layer.masksToBounds = true
-        textField.borderStyle = .roundedRect
+        textField.layer.borderColor = UIColor.black.cgColor // Устанавливаем цвет границы
+        textField.layer.cornerRadius = 12 // Устанавливаем радиус загруления углов
+        textField.layer.masksToBounds = true // Обрезаем содержимое по границам
+        textField.borderStyle = .roundedRect // Устанавливаем стиль границы
         return textField
     }()
     
-    let actionButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Set status", for: .normal)
-        button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 12
+    let actionButton: CustomButton = {
+        let button = CustomButton(
+            title: "Set Status", // Текст на кнопке
+            titleColor: .white, // Цвет текста на кнопке
+            backgroundColor: .blue) // Цвет фона кнопки
+        {
+            print("Status button pressed") // Действие при нажатии кнопки
+        }
         return button
     }()
     
@@ -105,13 +108,14 @@ class ProfileHeaderView: UIView {
         // Add action for button
         actionButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         
+        // Добавляем обработчик для нажатия на изображение профиля
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(profileImageViewTapped))
         profileImageView.addGestureRecognizer(tapGesture)
     }
     
     @objc private func statusTextChanged(_ textField: UITextField) {
         if let text = textField.text {
-            statusText = text
+            statusText = text // Обновляем статус при изменении текста
         }
     }
     
@@ -120,7 +124,7 @@ class ProfileHeaderView: UIView {
     }
     
     @objc private func buttonPressed() {
-        statusText = statusTextField.text ?? ""
-        print("Status: \(status)")
+        statusText = statusTextField.text ?? "" // Обновляем статус при нажатии на кнопку
+        print("Status: \(status)") // Печатаем статус в консоль
     }
 }

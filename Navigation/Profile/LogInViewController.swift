@@ -51,18 +51,19 @@ class LoginViewController: UIViewController {
     }()
 
     // Кнопка входа, заданная программно
-    private lazy var loginButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Log In", for: .normal) // Текст на кнопке
-        button.setTitleColor(.white, for: .normal) // Цвет текста на кнопке
-        button.layer.cornerRadius = 10 // Закругленные углы
-        button.layer.masksToBounds = true // Обрезка содержимого по границам
-        button.translatesAutoresizingMaskIntoConstraints = false // Отключение автоматических констрейнтов
+    private lazy var loginButton: CustomButton = {
+        let button = CustomButton(
+            title: "Log In", // Текст на кнопке
+            titleColor: .white, backgroundColor: .blue // Цвет фона кнопки(nil, так как у нас используется изображение)
+        ) { [weak self] in
+            self?.loginButtonTapped() // Действие, выполняемое при нажатие кнопки
+        }
+        
         if let bluePixel = UIImage(named: "blue_pixel") {
             // Установка фонового изображения для кнопки
             button.setBackgroundImage(bluePixel.stretchableImage(withLeftCapWidth: 0, topCapHeight: 0), for: .normal)
         }
-        button.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside) // Добавление действия на нажатие кнопки
+        
         return button
     }()
 
