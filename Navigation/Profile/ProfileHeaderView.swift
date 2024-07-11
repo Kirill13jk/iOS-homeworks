@@ -46,8 +46,9 @@ class ProfileHeaderView: UIView {
         let button = CustomButton(
             title: "Set Status", // Текст на кнопке
             titleColor: .white, // Цвет текста на кнопке
-            backgroundColor: .blue) // Цвет фона кнопки
-        {
+            backgroundColor: .blue, // Цвет фона кнопки
+            font: UIFont.systemFont(ofSize: 18)
+        ) {
             print("Status button pressed") // Действие при нажатии кнопки
         }
         return button

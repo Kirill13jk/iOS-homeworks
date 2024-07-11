@@ -54,7 +54,8 @@ class LoginViewController: UIViewController {
     private lazy var loginButton: CustomButton = {
         let button = CustomButton(
             title: "Log In", // Текст на кнопке
-            titleColor: .white, backgroundColor: .blue // Цвет фона кнопки(nil, так как у нас используется изображение)
+            titleColor: .white, backgroundColor: .blue,// Цвет фона кнопки(nil, так как у нас используется изображение)
+            font: UIFont.systemFont(ofSize: 16)
         ) { [weak self] in
             self?.loginButtonTapped() // Действие, выполняемое при нажатие кнопки
         }
