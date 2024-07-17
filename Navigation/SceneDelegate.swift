@@ -1,35 +1,32 @@
 import UIKit
 
+// SceneDelegate, где происходит инициализация и запуск приложения
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var appCoordinator: AppCoordinator?
 
+    // Метод, вызываемый при подключении сцены
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
+
+        // Создание основного окна приложения
         let window = UIWindow(windowScene: windowScene)
-        
-        // Создаем контроллеры для ленты и профиля пользователя
-        let feedViewController = FeedViewController()
-        let loginViewController = LoginViewController()
-        
-        // Используем фабрику для создания экземпляра LoginInspector
-        let loginFactory = MyLoginFactory()
-        loginViewController.loginDelegate = loginFactory.makeLoginInspector()
-        
-        // Создаем UINavigationController для LoginViewController
-        let loginNavigationController = UINavigationController(rootViewController: loginViewController)
-        
-        // Настраиваем Tab Bar Item для каждого UINavigationController
-        let feedNavigationController = UINavigationController(rootViewController: feedViewController)
-        feedNavigationController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "house"), selectedImage: nil)
-        loginNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), selectedImage: nil)
-        
-        // Создаем и настраиваем UITabBarController
+        // Создание TabBarController
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [feedNavigationController, loginNavigationController]
+        // Создание NavigationController
+        let navigationController = UINavigationController()
         
+        // Инициализация и запуск AppCoordinator
+        let appCoordinator = AppCoordinator(navigationController: navigationController, tabBarController: tabBarController)
+        self.appCoordinator = appCoordinator
+
+        // Установка корневого контроллера окна
         window.rootViewController = tabBarController
-        self.window = window
         window.makeKeyAndVisible()
+        self.window = window
+
+        // Запуск координатора
+        appCoordinator.start()
     }
 }

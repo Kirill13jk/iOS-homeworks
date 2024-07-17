@@ -2,6 +2,8 @@ import UIKit
 
 // ViewController для отображения ленты и взаимодействия с пользователем
 class FeedViewController: UIViewController {
+    // Слабая ссылка на координатор для избежания циклов сильных ссылок
+    weak var coordinator: FeedCoordinator?
     
     // Создаем экземпляр FeedViewModel
     private let viewModel = FeedViewModel()

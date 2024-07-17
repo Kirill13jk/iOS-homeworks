@@ -8,12 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		A21CA7282C0C7303000144FC /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21CA7272C0C7303000144FC /* PhotosTableViewCell.swift */; };
-		A244C16A2C3A7F3E002B0A28 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = A244C1692C3A7F3E002B0A28 /* iOSIntPackage */; };
 		A263BAF32C0C739F005EDA68 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263BAF22C0C739F005EDA68 /* PhotosViewController.swift */; };
 		A263BAF52C0C73BE005EDA68 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263BAF42C0C73BE005EDA68 /* PhotosCollectionViewCell.swift */; };
 		A263BAF92C0DE026005EDA68 /* PhotosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263BAF82C0DE026005EDA68 /* PhotosTableViewController.swift */; };
-		A285EF362C3FC0D400910A57 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A285EF352C3FC0D400910A57 /* SnapKit */; };
 		A285EF382C3FC45000910A57 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A285EF372C3FC45000910A57 /* FeedViewModel.swift */; };
+		A285EFB42C47E14700910A57 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A285EFB32C47E14700910A57 /* SnapKit */; };
+		A285EFB72C47E16F00910A57 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = A285EFB62C47E16F00910A57 /* iOSIntPackage */; };
+		A285EFB92C47E73700910A57 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A285EFB82C47E73700910A57 /* Coordinator.swift */; };
+		A285EFBB2C47E80800910A57 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A285EFBA2C47E80800910A57 /* AppCoordinator.swift */; };
+		A285EFBD2C47E9B800910A57 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A285EFBC2C47E9B800910A57 /* ProfileCoordinator.swift */; };
+		A285EFBF2C47E9D500910A57 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A285EFBE2C47E9D500910A57 /* FeedCoordinator.swift */; };
 		A2922B412C2EBED800B681A8 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2922B402C2EBED800B681A8 /* Checker.swift */; };
 		A2922B4C2C3023F000B681A8 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2922B4B2C3023F000B681A8 /* LoginFactory.swift */; };
 		A2922B4E2C30477600B681A8 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2922B4D2C30477600B681A8 /* LoginInspector.swift */; };
@@ -90,6 +94,10 @@
 		A263BAF42C0C73BE005EDA68 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		A263BAF82C0DE026005EDA68 /* PhotosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewController.swift; sourceTree = "<group>"; };
 		A285EF372C3FC45000910A57 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		A285EFB82C47E73700910A57 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		A285EFBA2C47E80800910A57 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		A285EFBC2C47E9B800910A57 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
+		A285EFBE2C47E9D500910A57 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		A2922B402C2EBED800B681A8 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		A2922B4B2C3023F000B681A8 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		A2922B4D2C30477600B681A8 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
@@ -128,9 +136,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A285EF362C3FC0D400910A57 /* SnapKit in Frameworks */,
+				A285EFB72C47E16F00910A57 /* iOSIntPackage in Frameworks */,
+				A285EFB42C47E14700910A57 /* SnapKit in Frameworks */,
 				A2F341B82C2193ED00AD0882 /* StorageService.framework in Frameworks */,
-				A244C16A2C3A7F3E002B0A28 /* iOSIntPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +220,10 @@
 				A2D44FE52BF9E8BC00BBE32A /* LaunchScreen.storyboard */,
 				A2D44FE82BF9E8BC00BBE32A /* Info.plist */,
 				A29A17DB2C3A8AA700E9B4AA /* CustomButton.swift */,
+				A285EFB82C47E73700910A57 /* Coordinator.swift */,
+				A285EFBA2C47E80800910A57 /* AppCoordinator.swift */,
+				A285EFBC2C47E9B800910A57 /* ProfileCoordinator.swift */,
+				A285EFBE2C47E9D500910A57 /* FeedCoordinator.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -296,8 +308,8 @@
 			);
 			name = Navigation;
 			packageProductDependencies = (
-				A244C1692C3A7F3E002B0A28 /* iOSIntPackage */,
-				A285EF352C3FC0D400910A57 /* SnapKit */,
+				A285EFB32C47E14700910A57 /* SnapKit */,
+				A285EFB62C47E16F00910A57 /* iOSIntPackage */,
 			);
 			productName = Navigation;
 			productReference = A2D44FD72BF9E8BA00BBE32A /* Navigation.app */;
@@ -372,8 +384,8 @@
 			);
 			mainGroup = A2D44FCE2BF9E8BA00BBE32A;
 			packageReferences = (
-				A244C1682C3A7F3E002B0A28 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
-				A285EF342C3FC0D400910A57 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				A285EFB22C47E14700910A57 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				A285EFB52C47E16F00910A57 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
 			);
 			productRefGroup = A2D44FD82BF9E8BA00BBE32A /* Products */;
 			projectDirPath = "";
@@ -420,10 +432,14 @@
 			files = (
 				A285EF382C3FC45000910A57 /* FeedViewModel.swift in Sources */,
 				A29285E72BF9F4E8000F1271 /* ProfileViewController.swift in Sources */,
+				A285EFB92C47E73700910A57 /* Coordinator.swift in Sources */,
 				A2922B412C2EBED800B681A8 /* Checker.swift in Sources */,
+				A285EFBF2C47E9D500910A57 /* FeedCoordinator.swift in Sources */,
 				A2D44FDF2BF9E8BA00BBE32A /* ViewController.swift in Sources */,
 				A2D44FDB2BF9E8BA00BBE32A /* AppDelegate.swift in Sources */,
+				A285EFBB2C47E80800910A57 /* AppCoordinator.swift in Sources */,
 				A2D44FDD2BF9E8BA00BBE32A /* SceneDelegate.swift in Sources */,
+				A285EFBD2C47E9B800910A57 /* ProfileCoordinator.swift in Sources */,
 				A2F341CC2C2405A200AD0882 /* User.swift in Sources */,
 				A29285EE2BF9F57D000F1271 /* ProfileHeaderView.swift in Sources */,
 				A2A6BC1E2C3C09E400A91E69 /* FeedModel.swift in Sources */,
@@ -824,15 +840,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		A244C1682C3A7F3E002B0A28 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/TrueMax/iOSIntPackage";
-			requirement = {
-				branch = imagepublisher;
-				kind = branch;
-			};
-		};
-		A285EF342C3FC0D400910A57 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		A285EFB22C47E14700910A57 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
 			requirement = {
@@ -840,18 +848,26 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		A285EFB52C47E16F00910A57 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TrueMax/iOSIntPackage";
+			requirement = {
+				branch = imagepublisher;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A244C1692C3A7F3E002B0A28 /* iOSIntPackage */ = {
+		A285EFB32C47E14700910A57 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A244C1682C3A7F3E002B0A28 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
-			productName = iOSIntPackage;
-		};
-		A285EF352C3FC0D400910A57 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A285EF342C3FC0D400910A57 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = A285EFB22C47E14700910A57 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		A285EFB62C47E16F00910A57 /* iOSIntPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A285EFB52C47E16F00910A57 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
+			productName = iOSIntPackage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
