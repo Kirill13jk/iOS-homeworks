@@ -2,37 +2,45 @@ import UIKit
 
 // Основной координатор приложения, управляющий UITabBarController
 class AppCoordinator: Coordinator {
-    // Массив дочерних координаторов
     var childCoordinators = [Coordinator]()
-    // Навигационный контроллер
     var navigationController: UINavigationController
-    // TabBar контроллер, отображающий вкладки
     var tabBarController: UITabBarController
 
-    // Инициализация с навигационным и таб бар контроллерами
     init(navigationController: UINavigationController, tabBarController: UITabBarController) {
         self.navigationController = navigationController
         self.tabBarController = tabBarController
     }
 
-    // Запуск координатора
     func start() {
-        // Инициализация и запуск координатора профиля
+        showLogin() // Показать экран логина при старте приложения
+    }
+
+    private func showLogin() {
+        let loginFactory = MyLoginFactory()
+        let loginCoordinator = LoginCoordinator(navigationController: navigationController, loginFactory: loginFactory)
+        loginCoordinator.start()
+        childCoordinators.append(loginCoordinator)
+    }
+
+    func didFinishLogin() {
+        childCoordinators.removeAll { $0 is LoginCoordinator }
+        showMain() // Показать основную часть приложения
+    }
+
+    private func showMain() {
         let profileCoordinator = ProfileCoordinator(navigationController: UINavigationController())
         profileCoordinator.start()
-        // Добавление в массив дочерних координаторов
         childCoordinators.append(profileCoordinator)
 
-        // Инициализация и запуск координатора ленты новостей
         let feedCoordinator = FeedCoordinator(navigationController: UINavigationController())
         feedCoordinator.start()
-        // Добавление в массив дочерних координаторов
         childCoordinators.append(feedCoordinator)
 
-        // Установка viewControllers для tabBarController
         tabBarController.viewControllers = [
             profileCoordinator.navigationController,
             feedCoordinator.navigationController
         ]
+
+        navigationController.viewControllers = [tabBarController]
     }
 }

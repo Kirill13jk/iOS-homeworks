@@ -6,6 +6,9 @@ protocol LoginViewControllerDelegate: AnyObject {
 }
 
 class LoginViewController: UIViewController {
+    // Слабая ссылка на координатор для избежания циклов сильных ссылок
+        weak var coordinator: LoginCoordinator?
+    
     // Поле для ввода логина или email, заданное программно
     private lazy var emailOrPhoneTextField: UITextField = {
         let textField = UITextField()

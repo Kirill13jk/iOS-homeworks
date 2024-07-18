@@ -92,21 +92,21 @@ class ProfileHeaderView: UIView {
         // Устанавливаем constraints для nameLabel
         nameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(27) // Отступ сверху
-            make.leading.equalTo(profileImageView.snp.trailing).offset(16) // Отступ слева от изображения
+            make.leading.equalTo(profileImageView.snp.trailing).offset(24) // Отступ слева от изображения
             make.trailing.equalToSuperview().offset(-20) // Отступ справа
         }
         
         // Устанавливаем constraints для bioLabel
         bioLabel.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(8) // Отступ сверху от nameLabel
-            make.leading.equalTo(profileImageView.snp.trailing).offset(16) // Отступ слева от изображения
+            make.leading.equalTo(profileImageView.snp.trailing).offset(24) // Отступ слева от изображения
             make.trailing.equalToSuperview().offset(-20) // Отступ справа
         }
         
         // Устанавливаем constraints для statusTextField
         statusTextField.snp.makeConstraints { make in
             make.top.equalTo(bioLabel.snp.bottom).offset(8) // Отступ сверху от bioLabel
-            make.leading.equalTo(profileImageView.snp.trailing).offset(16) // Отступ слева от изображения
+            make.leading.equalTo(profileImageView.snp.trailing).offset(24) // Отступ слева от изображения
             make.trailing.equalToSuperview().offset(-20) // Отступ справа
             make.height.equalTo(40) // Высота текстового поля
         }

@@ -18,6 +18,7 @@
 		A285EFBB2C47E80800910A57 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A285EFBA2C47E80800910A57 /* AppCoordinator.swift */; };
 		A285EFBD2C47E9B800910A57 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A285EFBC2C47E9B800910A57 /* ProfileCoordinator.swift */; };
 		A285EFBF2C47E9D500910A57 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A285EFBE2C47E9D500910A57 /* FeedCoordinator.swift */; };
+		A285EFC12C491F4F00910A57 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A285EFC02C491F4F00910A57 /* LoginCoordinator.swift */; };
 		A2922B412C2EBED800B681A8 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2922B402C2EBED800B681A8 /* Checker.swift */; };
 		A2922B4C2C3023F000B681A8 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2922B4B2C3023F000B681A8 /* LoginFactory.swift */; };
 		A2922B4E2C30477600B681A8 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2922B4D2C30477600B681A8 /* LoginInspector.swift */; };
@@ -98,6 +99,7 @@
 		A285EFBA2C47E80800910A57 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		A285EFBC2C47E9B800910A57 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		A285EFBE2C47E9D500910A57 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
+		A285EFC02C491F4F00910A57 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		A2922B402C2EBED800B681A8 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		A2922B4B2C3023F000B681A8 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		A2922B4D2C30477600B681A8 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				A285EFBA2C47E80800910A57 /* AppCoordinator.swift */,
 				A285EFBC2C47E9B800910A57 /* ProfileCoordinator.swift */,
 				A285EFBE2C47E9D500910A57 /* FeedCoordinator.swift */,
+				A285EFC02C491F4F00910A57 /* LoginCoordinator.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 				A285EFBD2C47E9B800910A57 /* ProfileCoordinator.swift in Sources */,
 				A2F341CC2C2405A200AD0882 /* User.swift in Sources */,
 				A29285EE2BF9F57D000F1271 /* ProfileHeaderView.swift in Sources */,
+				A285EFC12C491F4F00910A57 /* LoginCoordinator.swift in Sources */,
 				A2A6BC1E2C3C09E400A91E69 /* FeedModel.swift in Sources */,
 				A2F341CE2C2405CB00AD0882 /* UserService.swift in Sources */,
 				A29285E52BF9F4C1000F1271 /* PostViewController.swift in Sources */,
