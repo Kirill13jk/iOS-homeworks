@@ -1,6 +1,6 @@
 import UIKit
 
-// Основной координатор приложения, управляющий UITabBarController
+// Основной координатор приложения
 class AppCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
@@ -11,22 +11,27 @@ class AppCoordinator: Coordinator {
         self.tabBarController = tabBarController
     }
 
+    // Запуск основного координатора
     func start() {
-        showLogin() // Показать экран логина при старте приложения
+        showLogin()
     }
 
+    // Отображение экрана логина
     private func showLogin() {
         let loginFactory = MyLoginFactory()
         let loginCoordinator = LoginCoordinator(navigationController: navigationController, loginFactory: loginFactory)
+        loginCoordinator.parentCoordinator = self
         loginCoordinator.start()
         childCoordinators.append(loginCoordinator)
     }
 
+    // Завершение авторизации и отображение основной части приложения
     func didFinishLogin() {
         childCoordinators.removeAll { $0 is LoginCoordinator }
-        showMain() // Показать основную часть приложения
+        showMain()
     }
 
+    // Отображение основной части приложения
     private func showMain() {
         let profileCoordinator = ProfileCoordinator(navigationController: UINavigationController())
         profileCoordinator.start()

@@ -11,9 +11,12 @@ class FeedViewController: UIViewController {
     // Создаем текстовое поле для ввода слова
     private let guessTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Enter your guess" // Подсказка для пользователя
-        textField.borderStyle = .roundedRect // Стиль рамки
-        textField.translatesAutoresizingMaskIntoConstraints = false // Отключаем автозамыкание
+        // Устанавливаем подсказку для пользователя
+        textField.placeholder = "Enter your guess"
+        // Устанавливаем стиль рамки
+        textField.borderStyle = .roundedRect
+        // Отключаем автозамыкание
+        textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
@@ -23,7 +26,7 @@ class FeedViewController: UIViewController {
             title: "Check Guess", // Текст кнопки
             titleColor: .white, // Цвет текста
             backgroundColor: .systemBlue, // Цвет фона
-            font: UIFont.systemFont(ofSize: 16)
+            font: UIFont.systemFont(ofSize: 16) // Шрифт текста
         ) { [weak self] in
             // Действие при нажатии кнопки
             self?.checkGuess()
@@ -34,20 +37,27 @@ class FeedViewController: UIViewController {
     // Создаем метку для отображения результата проверки слова
     private let resultLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18) // Шрифт и размер текста
-        label.translatesAutoresizingMaskIntoConstraints = false // Отключаем автозамыкание
+        // Устанавливаем шрифт и размер текста
+        label.font = UIFont.systemFont(ofSize: 18)
+        // Отключаем автозамыкание
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
+    // Метод, вызываемый после загрузки view
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGray6 // Устанавливаем цвет фона
+        // Устанавливаем цвет фона
+        view.backgroundColor = .systemGray6
         
         // Создаем UIStackView для организации элементов интерфейса
         let stackView = UIStackView()
-        stackView.axis = .vertical // Вертикальное расположение элементов
-        stackView.spacing = 10 // Расстояние между элементами
-        stackView.translatesAutoresizingMaskIntoConstraints = false // Отключаем автозамыкание
+        // Вертикальное расположение элементов
+        stackView.axis = .vertical
+        // Расстояние между элементами
+        stackView.spacing = 10
+        // Отключаем автозамыкание
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         
         // Создаем кнопки для открытия постов
         let button1 = CustomButton(
@@ -80,13 +90,22 @@ class FeedViewController: UIViewController {
         // Добавляем UIStackView на главный view
         view.addSubview(stackView)
         
-        // Устанавливаем ограничения для UIStackView и кнопок
+        // Устанавливаем ограничения для UIStackView и элементов
         NSLayoutConstraint.activate([
+            // Устанавливаем одинаковую ширину и высоту для всех кнопок и текстовых полей
             button1.widthAnchor.constraint(equalToConstant: 200),
             button1.heightAnchor.constraint(equalToConstant: 50),
             
-            button2.heightAnchor.constraint(equalToConstant: 50),
+            button2.widthAnchor.constraint(equalTo: button1.widthAnchor),
+            button2.heightAnchor.constraint(equalTo: button1.heightAnchor),
             
+            guessTextField.widthAnchor.constraint(equalTo: button1.widthAnchor),
+            guessTextField.heightAnchor.constraint(equalTo: button1.heightAnchor),
+            
+            checkGuessButton.widthAnchor.constraint(equalTo: button1.widthAnchor),
+            checkGuessButton.heightAnchor.constraint(equalTo: button1.heightAnchor),
+            
+            // Центрируем UIStackView по горизонтали и вертикали
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
@@ -99,6 +118,7 @@ class FeedViewController: UIViewController {
     
     // Метод для проверки введенного слова
     private func checkGuess() {
+        // Проверяем, что поле ввода не пустое
         guard let guess = guessTextField.text, !guess.isEmpty else {
             // Если поле ввода пустое, отображаем сообщение об ошибке
             resultLabel.text = "Please enter a word"

@@ -10,7 +10,7 @@ class ProfileHeaderView: UIView {
         imageView.layer.cornerRadius = 50 // Скругляем углы изображения
         imageView.backgroundColor = .lightGray // Устанавливаем фон для изображения
         imageView.layer.borderWidth = 3 // Устанавливаем ширину границы
-        imageView.layer.borderColor = UIColor.black.cgColor // Устанавливаем цвет границы
+        imageView.layer.borderColor = UIColor.systemGray.cgColor // Устанавливаем цвет границы
         imageView.clipsToBounds = true // Обрезаем изображение по границам view
         imageView.isUserInteractionEnabled = true // Разрешаем взаимодействие с изображением
         return imageView
@@ -35,7 +35,7 @@ class ProfileHeaderView: UIView {
         let textField = UITextField()
         textField.placeholder = "Enter your status" // Устанавливаем текст placeholder
         textField.layer.borderWidth = 2 // Устанавливаем ширину границы
-        textField.layer.borderColor = UIColor.black.cgColor // Устанавливаем цвет границы
+        textField.layer.borderColor = UIColor.systemGray.cgColor // Устанавливаем цвет границы
         textField.layer.cornerRadius = 12 // Скругляем углы текстового поля
         textField.layer.masksToBounds = true // Обрезаем содержимое по границам
         textField.borderStyle = .roundedRect // Устанавливаем стиль границы

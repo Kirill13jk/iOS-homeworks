@@ -19,6 +19,7 @@
 		A285EFBD2C47E9B800910A57 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A285EFBC2C47E9B800910A57 /* ProfileCoordinator.swift */; };
 		A285EFBF2C47E9D500910A57 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A285EFBE2C47E9D500910A57 /* FeedCoordinator.swift */; };
 		A285EFC12C491F4F00910A57 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A285EFC02C491F4F00910A57 /* LoginCoordinator.swift */; };
+		A285EFC32C49472E00910A57 /* LoginViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A285EFC22C49472E00910A57 /* LoginViewControllerDelegate.swift */; };
 		A2922B412C2EBED800B681A8 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2922B402C2EBED800B681A8 /* Checker.swift */; };
 		A2922B4C2C3023F000B681A8 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2922B4B2C3023F000B681A8 /* LoginFactory.swift */; };
 		A2922B4E2C30477600B681A8 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2922B4D2C30477600B681A8 /* LoginInspector.swift */; };
@@ -100,6 +101,7 @@
 		A285EFBC2C47E9B800910A57 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		A285EFBE2C47E9D500910A57 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		A285EFC02C491F4F00910A57 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		A285EFC22C49472E00910A57 /* LoginViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegate.swift; sourceTree = "<group>"; };
 		A2922B402C2EBED800B681A8 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		A2922B4B2C3023F000B681A8 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		A2922B4D2C30477600B681A8 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
@@ -172,16 +174,36 @@
 			path = Feed;
 			sourceTree = "<group>";
 		};
+		A285EFC42C494F0600910A57 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				A285EFB82C47E73700910A57 /* Coordinator.swift */,
+				A285EFBA2C47E80800910A57 /* AppCoordinator.swift */,
+				A285EFBC2C47E9B800910A57 /* ProfileCoordinator.swift */,
+				A285EFBE2C47E9D500910A57 /* FeedCoordinator.swift */,
+				A285EFC02C491F4F00910A57 /* LoginCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		A285EFC52C494F3700910A57 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				A2B618052BFA1823004FAFBB /* LogInViewController.swift */,
+				A2922B402C2EBED800B681A8 /* Checker.swift */,
+				A2922B4B2C3023F000B681A8 /* LoginFactory.swift */,
+				A2922B4D2C30477600B681A8 /* LoginInspector.swift */,
+				A285EFC22C49472E00910A57 /* LoginViewControllerDelegate.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		A29285EC2BF9F55A000F1271 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				A29285E62BF9F4E8000F1271 /* ProfileViewController.swift */,
 				A29285ED2BF9F57D000F1271 /* ProfileHeaderView.swift */,
 				A2B6180B2BFE5DA3004FAFBB /* ProfileTableHeaderView.swift */,
-				A2B618052BFA1823004FAFBB /* LogInViewController.swift */,
-				A2922B402C2EBED800B681A8 /* Checker.swift */,
-				A2922B4B2C3023F000B681A8 /* LoginFactory.swift */,
-				A2922B4D2C30477600B681A8 /* LoginInspector.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -209,10 +231,12 @@
 		A2D44FD92BF9E8BA00BBE32A /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				A285EF392C3FC6FD00910A57 /* Feed */,
+				A285EFC42C494F0600910A57 /* Coordinator */,
 				A2F341D32C24144700AD0882 /* Galery */,
 				A2F341D22C24142600AD0882 /* Post */,
 				A2F341D12C24069D00AD0882 /* User */,
+				A285EFC52C494F3700910A57 /* Login */,
+				A285EF392C3FC6FD00910A57 /* Feed */,
 				A29285EC2BF9F55A000F1271 /* Profile */,
 				A2D44FDA2BF9E8BA00BBE32A /* AppDelegate.swift */,
 				A2D44FDC2BF9E8BA00BBE32A /* SceneDelegate.swift */,
@@ -222,11 +246,6 @@
 				A2D44FE52BF9E8BC00BBE32A /* LaunchScreen.storyboard */,
 				A2D44FE82BF9E8BC00BBE32A /* Info.plist */,
 				A29A17DB2C3A8AA700E9B4AA /* CustomButton.swift */,
-				A285EFB82C47E73700910A57 /* Coordinator.swift */,
-				A285EFBA2C47E80800910A57 /* AppCoordinator.swift */,
-				A285EFBC2C47E9B800910A57 /* ProfileCoordinator.swift */,
-				A285EFBE2C47E9D500910A57 /* FeedCoordinator.swift */,
-				A285EFC02C491F4F00910A57 /* LoginCoordinator.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -363,7 +382,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
-				LastUpgradeCheck = 1530;
+				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					A2D44FD62BF9E8BA00BBE32A = {
 						CreatedOnToolsVersion = 15.3;
@@ -433,6 +452,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A285EFC32C49472E00910A57 /* LoginViewControllerDelegate.swift in Sources */,
 				A285EF382C3FC45000910A57 /* FeedViewModel.swift in Sources */,
 				A29285E72BF9F4E8000F1271 /* ProfileViewController.swift in Sources */,
 				A285EFB92C47E73700910A57 /* Coordinator.swift in Sources */,
@@ -704,6 +724,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -738,6 +759,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;

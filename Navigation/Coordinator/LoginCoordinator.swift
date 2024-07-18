@@ -5,12 +5,14 @@ class LoginCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     var loginFactory: LoginFactory
+    weak var parentCoordinator: AppCoordinator?
 
     init(navigationController: UINavigationController, loginFactory: LoginFactory) {
         self.navigationController = navigationController
         self.loginFactory = loginFactory
     }
 
+    // Запуск координатора авторизации
     func start() {
         let loginViewController = LoginViewController()
         loginViewController.coordinator = self
@@ -18,7 +20,8 @@ class LoginCoordinator: Coordinator {
         navigationController.pushViewController(loginViewController, animated: true)
     }
 
+    // Завершение авторизации и уведомление родительского координатора
     func didFinishLogin() {
-        // Логика завершения авторизации и переход к другому координатору, если нужно
+        parentCoordinator?.didFinishLogin()
     }
 }
