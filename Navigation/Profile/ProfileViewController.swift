@@ -2,6 +2,8 @@ import UIKit
 import StorageService
 
 class ProfileViewController: UIViewController {
+    // Слабая ссылка на координатор для избежания циклов сильных ссылок
+    weak var coordinator: ProfileCoordinator?
 
     // Создаем таблицу для отображения данных профиля и постов
     private let tableView = UITableView()
