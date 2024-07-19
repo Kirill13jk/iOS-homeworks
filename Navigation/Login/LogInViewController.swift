@@ -92,7 +92,7 @@ class LoginViewController: UIViewController {
 
     // Иконка AppIcon
     private lazy var appIconImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "AppIcon"))
+        let imageView = UIImageView(image: UIImage(named: "app icon"))
         // Устанавливаем режим содержимого
         imageView.contentMode = .scaleAspectFit
         // Отключаем автоматические констрейнты
