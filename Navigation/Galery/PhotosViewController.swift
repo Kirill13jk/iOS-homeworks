@@ -72,7 +72,7 @@ class PhotosViewController: UIViewController, UICollectionViewDataSource, UIColl
         let startTime = CFAbsoluteTimeGetCurrent() // Замеряем начальное время
         
         // Обрабатываем изображения на отдельном потоке
-        imageProcessor.processImagesOnThread(sourceImages: rawImages, filter: .colorInvert, qos: qos) { [weak self] processedCGImages in
+        imageProcessor.processImagesOnThread(sourceImages: rawImages, filter: .fade, qos: qos) { [weak self] processedCGImages in
             guard let self = self else { return }
             // Преобразуем массив CGImage? в массив UIImage
             self.processedImages = processedCGImages.compactMap { cgImage in
