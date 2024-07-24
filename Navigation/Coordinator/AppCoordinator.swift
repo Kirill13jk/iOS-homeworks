@@ -41,6 +41,7 @@ class AppCoordinator: Coordinator {
         feedCoordinator.start()
         childCoordinators.append(feedCoordinator)
 
+        
         tabBarController.viewControllers = [
             profileCoordinator.navigationController,
             feedCoordinator.navigationController
