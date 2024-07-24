@@ -2,8 +2,8 @@ import UIKit
 
 // Синглтон Checker
 class Checker {
-    private let login = "1" // Ожидаемый логин
-    private let password = "1" // Ожидаемый пароль
+    private let login = "12345678" // Ожидаемый логин
+    private let password = "C12345678" // Ожидаемый пароль
 
     static let shared = Checker() // Синглтон
 

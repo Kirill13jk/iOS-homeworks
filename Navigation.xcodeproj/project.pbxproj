@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A21676162C5113DF001C904E /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21676152C5113DF001C904E /* AppError.swift */; };
 		A21CA7282C0C7303000144FC /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21CA7272C0C7303000144FC /* PhotosTableViewCell.swift */; };
 		A263BAF32C0C739F005EDA68 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263BAF22C0C739F005EDA68 /* PhotosViewController.swift */; };
 		A263BAF52C0C73BE005EDA68 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263BAF42C0C73BE005EDA68 /* PhotosCollectionViewCell.swift */; };
@@ -92,6 +93,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A21676152C5113DF001C904E /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		A21CA7272C0C7303000144FC /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		A263BAF22C0C739F005EDA68 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		A263BAF42C0C73BE005EDA68 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				A2D44FE52BF9E8BC00BBE32A /* LaunchScreen.storyboard */,
 				A2D44FE82BF9E8BC00BBE32A /* Info.plist */,
 				A29A17DB2C3A8AA700E9B4AA /* CustomButton.swift */,
+				A21676152C5113DF001C904E /* AppError.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 				A285EFBF2C47E9D500910A57 /* FeedCoordinator.swift in Sources */,
 				A2D44FDF2BF9E8BA00BBE32A /* ViewController.swift in Sources */,
 				A2D44FDB2BF9E8BA00BBE32A /* AppDelegate.swift in Sources */,
+				A21676162C5113DF001C904E /* AppError.swift in Sources */,
 				A285EFBB2C47E80800910A57 /* AppCoordinator.swift in Sources */,
 				A2D44FDD2BF9E8BA00BBE32A /* SceneDelegate.swift in Sources */,
 				A285EFCA2C4BE14D00910A57 /* PasswordBruteForcer.swift in Sources */,
