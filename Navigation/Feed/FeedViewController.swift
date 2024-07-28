@@ -1,5 +1,11 @@
 import UIKit
 
+enum GuessError: Error {
+    case emptyInput
+    case incorrectGuess
+}
+
+
 // ViewController для отображения ленты и взаимодействия с пользователем
 class FeedViewController: UIViewController {
     weak var coordinator: FeedCoordinator? // Слабая ссылка на координатор для избежания циклов сильных ссылок
@@ -158,18 +164,55 @@ class FeedViewController: UIViewController {
     
     // Метод для проверки введенного слова
     private func checkGuess() {
-        // Проверяем, что поле ввода не пустое
-        guard let guess = guessTextField.text, !guess.isEmpty else {
-            resultLabel.text = "Please enter a word" // Сообщение об ошибке
-            resultLabel.textColor = .red // Цвет текста сообщения об ошибке
-            return
+        do {
+            // Пытаемся проверить введенное слово с помощью функции validateGuess, которя может ошибку
+            let result = try validateGuess(guess: guessTextField.text)
+            // Если слово правильное, обновляем метку результатом и устанавливаем зеленный цвет текста
+            resultLabel.text = result
+            resultLabel.textColor = .green
+        } catch let error as GuessError {
+            // Если была выброшена ошибка GuessError, обрабатываем ее в методе handleGuessError
+            handleGuessError(error)
+        } catch {
+            // Обрабатываем любые другие наожиданные ошибки, устанавливая соответствующее сообщение
+            resultLabel.text = "Unexpected error."
+            resultLabel.textColor = .red
+        }
+    }
+    
+    // Функция для проверки введенного слова, выбрасывает ошибки в случае некорретного ввода
+    private func validateGuess(guess: String?) throws -> String {
+        // Проверяем, что введенное слово не пустое
+        guard let guess = guess, !guess.isEmpty else {
+            throw GuessError.emptyInput
+        }
+        let correctWord = "apple" // Пример правильного слова
+        // Проверяем, совпадает ли введенног слово с правильными, не учитывая регистр
+        guard guess.lowercased() == correctWord.lowercased() else {
+            throw GuessError.incorrectGuess
         }
         
-        // Получаем результат проверки слова через ViewModel
-        let result = viewModel.checkGuess(woed: guess)
-        resultLabel.text = result.0 // Устанавливаем текст результата
-        resultLabel.textColor = result.1 // Устанавливаем цвет текста результата
+        // Если слово правильное, возвращаем соответствующее сообщение
+        return "Correct! The secret word is \(correctWord)."
     }
+    
+    // Функции для обработки ошибок ввода слова
+    private func handleGuessError(_ error: GuessError) {
+        var message = ""
+        
+        // В зависимости от типа ошибки устанавливаем соответствующее сообщение
+        switch error {
+        case .emptyInput:
+            message = "Please enter a word."
+        case .incorrectGuess:
+            message = "Incorect word. Please try again."
+        }
+        
+        // Обновляем метку с сообщением об ошибки и устанавливаем красный цвет текста
+        resultLabel.text = message
+        resultLabel.textColor = .red
+    }
+    
     
     // Метод для открытия поста
     @objc private func openPost() {

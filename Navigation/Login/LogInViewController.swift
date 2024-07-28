@@ -59,7 +59,7 @@ class LoginViewController: UIViewController {
         let button = CustomButton(
             title: "Log In",  // Текст на кнопке
             titleColor: .white,  // Цвет текста кнопки
-            backgroundColor: .blue,  // Цвет фона кнопки
+            backgroundColor: .systemBlue,  // Цвет фона кнопки
             font: UIFont.systemFont(ofSize: 16)  // Шрифт текста на кнопке
         ) { [weak self] in
             self?.loginButtonTapped()  // Действие при нажатии кнопки
