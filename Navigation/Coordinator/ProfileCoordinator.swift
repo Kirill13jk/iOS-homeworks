@@ -7,7 +7,7 @@ class ProfileCoordinator: Coordinator {
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.navigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person"), tag: 1)
+        self.navigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "person"), tag: 1)
     }
 
     // Запуск координатора профиля

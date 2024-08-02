@@ -7,7 +7,7 @@ class FeedCoordinator: Coordinator {
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.navigationController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "house"), tag: 2)
+        self.navigationController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(named: "feed"), tag: 2)
     }
 
     // Запуск координатора ленты новостей

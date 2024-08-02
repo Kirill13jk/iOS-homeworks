@@ -179,12 +179,12 @@ class LoginViewController: UIViewController {
     // Метод для проверки логина и пароля с использованием Checker
     private func authenticateUser(login: String, password: String) -> Result<AuthenticationSuccess, LoginError> {
         // Проверка длины логина
-        guard login.count >= 6 else {
+        guard login.count >= 1 else {
             return .failure(.invalidUsernameLength)
         }
         
         // Проверка длины пароля
-        guard password.count >= 8 else {
+        guard password.count >= 1 else {
             return .failure(.invalidPasswordLength)
         }
         

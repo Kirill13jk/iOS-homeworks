@@ -41,10 +41,19 @@ class AppCoordinator: Coordinator {
         feedCoordinator.start()
         childCoordinators.append(feedCoordinator)
 
+        let trackCoordinator = TrackCoordinator(navigationController: UINavigationController())
+        trackCoordinator.start()
+        childCoordinators.append(trackCoordinator)
+        
+        let youtubeCoordinator = YouTybeCoordinator(navigationController: UINavigationController())
+        youtubeCoordinator.start()
+        childCoordinators.append(youtubeCoordinator)
         
         tabBarController.viewControllers = [
             profileCoordinator.navigationController,
-            feedCoordinator.navigationController
+            feedCoordinator.navigationController,
+            trackCoordinator.navigationController,
+            youtubeCoordinator.navigationController
         ]
 
         navigationController.viewControllers = [tabBarController]
