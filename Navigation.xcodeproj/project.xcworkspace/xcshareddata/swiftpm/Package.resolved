@@ -1,13 +1,13 @@
 {
-  "originHash" : "efd6eb8b36ed364de3f69e2f14cf3376affb2bb27f37b139be45f990d96e0ea3",
+  "originHash" : "ef44bdd8ffdb0e287b6c2dd0022190572edccb51672a9c10cbc214d8eb119662",
   "pins" : [
     {
       "identity" : "iosintpackage",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/TrueMax/iOSIntPackage",
       "state" : {
-        "branch" : "imagepublisher",
-        "revision" : "e1cc0e1b76d7cb8f770d903d85ae9ed91ae026bd"
+        "revision" : "e1cc0e1b76d7cb8f770d903d85ae9ed91ae026bd",
+        "version" : "3.2.3"
       }
     },
     {
@@ -17,6 +17,15 @@
       "state" : {
         "revision" : "2842e6e84e82eb9a8dac0100ca90d9444b0307f4",
         "version" : "5.7.1"
+      }
+    },
+    {
+      "identity" : "youtube-ios-player-helper",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/youtube/youtube-ios-player-helper",
+      "state" : {
+        "revision" : "f57129cd4380ec0a74dd3a59da3270a1d653d59b",
+        "version" : "1.0.4"
       }
     }
   ],
