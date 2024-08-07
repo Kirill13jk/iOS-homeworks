@@ -1,116 +1,133 @@
 import UIKit
 import iOSIntPackage
 
-// Контроллер для отображения фото галереи
-class PhotosViewController: UIViewController, ImageLibrarySubscriber {
-    
-    // Создаем UICollectionView для отображения изображений
-    private let collectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        let itemSpacing: CGFloat = 8 // Расстояние между элементами
-        let itemsPerRow: CGFloat = 3 // Количество элементов в строке
-        // Расчет ширины элемента с учетом отступов и количества элементов в строке
-        let width = (UIScreen.main.bounds.width - (itemsPerRow + 1) * itemSpacing) / itemsPerRow
-        layout.itemSize = CGSize(width: width, height: width)
-        layout.sectionInset = UIEdgeInsets(top: itemSpacing, left: itemSpacing, bottom: itemSpacing, right: itemSpacing)
-        layout.minimumLineSpacing = itemSpacing // Минимальное расстояние между строками
-        layout.minimumInteritemSpacing = itemSpacing // Минимальное расстояние между элементами в строке
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .white
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        return collectionView
-    }()
-    
-    private var images: [UIImage] = [] // Массив для хранения изображений
-    private var imagePublisher: ImagePublisherFacade? // Экземпляр ImagePublisherFacade
+class PhotosViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+    // Создаем экземпляр ImageProcessor для обработки изображений
+    var imageProcessor = ImageProcessor()
+    // Массив необработанных изображений
+    var rawImages: [UIImage] = []
+    // Массив обработанных изображений
+    var processedImages: [UIImage] = []
+
+    // Создаем переменную для UICollectionView
+    var collectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Устанавливаем белый фон для отладки и общего вида
         view.backgroundColor = .white
-        view.addSubview(collectionView)
         
-        // Устанавливаем констрейнты для collectionView
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
+        // Создаем layout для коллекции с отступами между элементами
+        let layout = UICollectionViewFlowLayout()
+        let spacing: CGFloat = 8
+        // Размер элемента рассчитывается исходя из ширины экрана и отступов
+        let itemSize = (view.frame.width - spacing * 4) / 3
+        layout.itemSize = CGSize(width: itemSize, height: itemSize)
+        layout.minimumInteritemSpacing = spacing // Отступ между элементами по горизонтали
+        layout.minimumLineSpacing = spacing // Отступ между элементами по вертикали
+        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing) // Отступы для секции коллекции
         
-        collectionView.dataSource = self
-        collectionView.delegate = self
+        // Создаем и настраиваем UICollectionView с заданным layout
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
+        collectionView.backgroundColor = .white // Устанавливаем белый фон для коллекции
+        collectionView.dataSource = self // Устанавливаем источник данных
+        collectionView.delegate = self // Устанавливаем делегата
+        // Регистрируем ячейку для использования в коллекции
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        view.addSubview(collectionView) // Добавляем коллекцию на экран
         
-        // Регистрируем PhotosCollectionViewCell для использования в collectionView
-        collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: "PhotoCell")
+        // Загружаем необработанные изображения
+        rawImages = loadRawImages()
         
-        // Показываем navigation bar
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        
-        // Инициализация imagePublisher и подписка на обновления
-        imagePublisher = ImagePublisherFacade()
-        imagePublisher?.subscribe(self)
-        
-        // Передаем пользовательские изображения
-        let userImages: [UIImage] = loadUserImages()
-        // Проверка, что все 20 изображений загружены
-        assert(userImages.count == 20, "Должно быть загружено 20 изображений, но загружено \(userImages.count)")
-        imagePublisher?.addImagesWithTimer(time: 0.5, repeat: userImages.count, userImages: userImages)
+        // Проверяем, что изображения загружены
+        guard !rawImages.isEmpty else {
+            print("Не удалось загрузить изображения")
+            return
+        }
+
+        print("Загружено \(rawImages.count) изображений")
+
+        // Обрабатываем изображения с использованием заданного уровня качества обслуживания (QoS)
+        processImagesWithQualityOfService(.userInitiated)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    
-    // Отменяем подписку при деинициализации контроллера
-    deinit {
-        imagePublisher?.removeSubscription(for: self)
-    }
-    
-    // Метод для загрузки пользовательских изображений
-    private func loadUserImages() -> [UIImage] {
-        var images = [UIImage]()
+    // Метод для загрузки необработанных изображений из ресурсов проекта
+    func loadRawImages() -> [UIImage] {
+        var images: [UIImage] = []
         for i in 1...20 {
+            // Загружаем изображения с именами "photo1", "photo2", и т.д.
             if let image = UIImage(named: "photo\(i)") {
                 images.append(image)
+            } else {
+                print("Изображение photo\(i) не найдено")
             }
         }
         return images
     }
-    
-    // Метод для получения изображений от ImagePublisherFacade
-    func receive(images: [UIImage]) {
-        // Добавляем уникальные изображения в массив, удаляя дубликаты
-        let uniqueReceivedImages = images.unique()
-        self.images.append(contentsOf: uniqueReceivedImages)
-        self.images = self.images.unique()
-        self.collectionView.reloadData() // Перезагружаем данные коллекции
-    }
-}
 
-// Расширение для реализации протокола UICollectionViewDataSource и UICollectionViewDelegate
-extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count // Количество элементов соответствует количеству изображений в массиве
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        // Декьюим ячейку с идентификатором "PhotoCell"
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as! PhotosCollectionViewCell
-        cell.configure(with: images[indexPath.item]) // Настраиваем ячейку с изображением
-        return cell
-    }
-}
-
-// Расширение для удаления дубликатов из массива
-extension Array where Element: Equatable {
-    func unique() -> [Element] {
-        var uniqueValues: [Element] = []
-        for value in self {
-            if !uniqueValues.contains(value) {
-                uniqueValues.append(value)
+    // Метод для обработки изображений с использованием заданного QoS
+    func processImagesWithQualityOfService(_ qos: QualityOfService) {
+        let startTime = CFAbsoluteTimeGetCurrent() // Замеряем начальное время
+        
+        // Обрабатываем изображения на отдельном потоке
+        imageProcessor.processImagesOnThread(sourceImages: rawImages, filter: .fade, qos: qos) { [weak self] processedCGImages in
+            guard let self = self else { return }
+            // Преобразуем массив CGImage? в массив UIImage
+            self.processedImages = processedCGImages.compactMap { cgImage in
+                if let cgImage = cgImage {
+                    return UIImage(cgImage: cgImage)
+                } else {
+                    return nil
+                }
+            }
+            
+            let timeElapsed = CFAbsoluteTimeGetCurrent() - startTime // Вычисляем время обработки
+            print("Время обработки с qos \(qos): \(timeElapsed) секунд")
+            
+            // Обновляем UI на главном потоке
+            DispatchQueue.main.async {
+                self.collectionView.reloadData() // Перезагружаем данные коллекции
             }
         }
-        return uniqueValues
+    }
+    
+    // MARK: - UICollectionViewDataSource
+
+    // Метод для определения количества элементов в секции коллекции
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return processedImages.count
+    }
+
+    // Метод для создания и конфигурации ячейки коллекции
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        
+        // Удаляем старые изображения из ячейки, если они есть
+        for subview in cell.contentView.subviews {
+            subview.removeFromSuperview()
+        }
+        
+        // Создаем и настраиваем UIImageView для отображения обработанного изображения
+        let imageView = UIImageView(image: processedImages[indexPath.item])
+        imageView.contentMode = .scaleAspectFill // Устанавливаем режим отображения
+        imageView.clipsToBounds = true // Обрезаем изображение по границам UIImageView
+        imageView.frame = cell.contentView.bounds // Устанавливаем размер UIImageView равный размеру ячейки
+        cell.contentView.addSubview(imageView) // Добавляем UIImageView в ячейку
+        
+        return cell
+    }
+    
+    // MARK: - UICollectionViewDelegateFlowLayout
+
+    // Метод для установки минимального отступа между элементами по горизонтали
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
+    }
+
+    // Метод для установки минимального отступа между элементами по вертикали
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
     }
 }
