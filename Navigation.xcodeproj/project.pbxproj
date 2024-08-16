@@ -14,6 +14,8 @@
 		A216762E2C5D0EA9001C904E /* YouTubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216762D2C5D0EA9001C904E /* YouTubeViewController.swift */; };
 		A21676302C5D0F7E001C904E /* YouTybeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216762F2C5D0F7E001C904E /* YouTybeCoordinator.swift */; };
 		A21CA7282C0C7303000144FC /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21CA7272C0C7303000144FC /* PhotosTableViewCell.swift */; };
+		A249CE3B2C6A3AB500AF2A23 /* InfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A249CE3A2C6A3AB500AF2A23 /* InfoCoordinator.swift */; };
+		A249CE3E2C6B82F500AF2A23 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A249CE3D2C6B82F500AF2A23 /* Planet.swift */; };
 		A263BAF32C0C739F005EDA68 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263BAF22C0C739F005EDA68 /* PhotosViewController.swift */; };
 		A263BAF52C0C73BE005EDA68 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263BAF42C0C73BE005EDA68 /* PhotosCollectionViewCell.swift */; };
 		A263BAF92C0DE026005EDA68 /* PhotosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263BAF82C0DE026005EDA68 /* PhotosTableViewController.swift */; };
@@ -110,6 +112,8 @@
 		A216762D2C5D0EA9001C904E /* YouTubeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeViewController.swift; sourceTree = "<group>"; };
 		A216762F2C5D0F7E001C904E /* YouTybeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTybeCoordinator.swift; sourceTree = "<group>"; };
 		A21CA7272C0C7303000144FC /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
+		A249CE3A2C6A3AB500AF2A23 /* InfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCoordinator.swift; sourceTree = "<group>"; };
+		A249CE3D2C6B82F500AF2A23 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		A263BAF22C0C739F005EDA68 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		A263BAF42C0C73BE005EDA68 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		A263BAF82C0DE026005EDA68 /* PhotosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewController.swift; sourceTree = "<group>"; };
@@ -204,6 +208,15 @@
 			path = Sound;
 			sourceTree = "<group>";
 		};
+		A249CE3C2C6B82DB00AF2A23 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				A29285EA2BF9F543000F1271 /* InfoViewController.swift */,
+				A249CE3D2C6B82F500AF2A23 /* Planet.swift */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
 		A285EF392C3FC6FD00910A57 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,6 +237,7 @@
 				A285EFC02C491F4F00910A57 /* LoginCoordinator.swift */,
 				A21676192C5A46AF001C904E /* TrackCoordinator.swift */,
 				A216762F2C5D0F7E001C904E /* YouTybeCoordinator.swift */,
+				A249CE3A2C6A3AB500AF2A23 /* InfoCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -274,6 +288,7 @@
 		A2D44FD92BF9E8BA00BBE32A /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				A249CE3C2C6B82DB00AF2A23 /* Info */,
 				A285EFC42C494F0600910A57 /* Coordinator */,
 				A2F341D32C24144700AD0882 /* Galery */,
 				A2F341D22C24142600AD0882 /* Post */,
@@ -328,7 +343,6 @@
 		A2F341D22C24142600AD0882 /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				A29285EA2BF9F543000F1271 /* InfoViewController.swift */,
 				A29285E42BF9F4C1000F1271 /* PostViewController.swift */,
 				A2B6180D2BFE623F004FAFBB /* PostTableViewCell.swift */,
 			);
@@ -519,10 +533,12 @@
 				A2D44FDD2BF9E8BA00BBE32A /* SceneDelegate.swift in Sources */,
 				A21676302C5D0F7E001C904E /* YouTybeCoordinator.swift in Sources */,
 				A216761A2C5A46AF001C904E /* TrackCoordinator.swift in Sources */,
+				A249CE3B2C6A3AB500AF2A23 /* InfoCoordinator.swift in Sources */,
 				A285EFCA2C4BE14D00910A57 /* PasswordBruteForcer.swift in Sources */,
 				A285EFBD2C47E9B800910A57 /* ProfileCoordinator.swift in Sources */,
 				A2F341CC2C2405A200AD0882 /* User.swift in Sources */,
 				A29285EE2BF9F57D000F1271 /* ProfileHeaderView.swift in Sources */,
+				A249CE3E2C6B82F500AF2A23 /* Planet.swift in Sources */,
 				A285EFC12C491F4F00910A57 /* LoginCoordinator.swift in Sources */,
 				A2A6BC1E2C3C09E400A91E69 /* FeedModel.swift in Sources */,
 				A2F341CE2C2405CB00AD0882 /* UserService.swift in Sources */,
