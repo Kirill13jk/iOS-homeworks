@@ -4,6 +4,7 @@ import UIKit
 class ProfileCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
+    weak var parentCoordinator: AppCoordinator?  // Связь с родительским координатором
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -12,12 +13,15 @@ class ProfileCoordinator: Coordinator {
 
     // Запуск координатора профиля
     func start() {
-        // Создание и настройка ProfileViewController
         let profileVC = ProfileViewController()
-        // Установка координатора
         profileVC.coordinator = self
-        // Пуш представления на стек навигации
         navigationController.pushViewController(profileVC, animated: false)
+    }
+
+    // Метод для обработки завершения сеанса
+    func didFinishLogout() {
+        // Сообщаем родительскому координатору, что нужно вернуться на экран входа
+        parentCoordinator?.didFinishLogout()
     }
 }
 

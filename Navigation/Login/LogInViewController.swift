@@ -1,265 +1,144 @@
 import UIKit
+import FirebaseAuth
 
-// Определение собственного домена ошибок
-enum LoginError: Error {
-    case invalidUsernameLength  // Ошибка: длина логина меньше 6 символов
-    case invalidPasswordLength  // Ошибка: длина пароля меньше 8 символов
-    case authenticationFailed   // Ошибка: неудачная авторизация
-}
-
-// Результат успешной авторизации
-struct AuthenticationSuccess {
-    let username: String
-}
-
+// Контроллер для входа и регистрации
 class LoginViewController: UIViewController {
-    weak var coordinator: LoginCoordinator?  // Слабая ссылка на координатора для избежания циклов сильных ссылок
-    var loginDelegate: LoginViewControllerDelegate?  // Делегат для проверки логина и пароля
+    weak var coordinator: LoginCoordinator? // Слабая ссылка на координатор, чтобы избежать циклических ссылок
+    var checkerService: CheckerServiceProtocol? // Сервис для проверки учетных данных и регистрации
     
-    // Поле ввода для email или телефона
-    private lazy var emailOrPhoneTextField: UITextField = {
+    // Поле для ввода email
+    private lazy var emailTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Email or phone"  // Подсказка в поле ввода
-        textField.backgroundColor = .systemGray6  // Фон поля ввода
-        textField.layer.borderWidth = 0.5  // Толщина границы поля ввода
-        textField.layer.borderColor = UIColor.lightGray.cgColor  // Цвет границы
-        textField.layer.cornerRadius = 10  // Закругленные углы
-        textField.layer.masksToBounds = true  // Обрезаем содержимое по границам
-        textField.autocorrectionType = .no  // Отключение автокоррекции
-        textField.keyboardType = .emailAddress  // Тип клавиатуры (email)
-        textField.returnKeyType = .next  // Тип клавиши возврата (следующий)
-        textField.translatesAutoresizingMaskIntoConstraints = false  // Отключаем автоматические констрейнты
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
-        textField.leftView = paddingView  // Добавляем отступ слева
-        textField.leftViewMode = .always
+        textField.placeholder = "Email" // Подсказка внутри текстового поля
+        textField.autocapitalizationType = .none // Отключаем автокапитализацию
+        textField.autocorrectionType = .no // Отключаем автокоррекцию
+        textField.keyboardType = .emailAddress // Устанавливаем тип клавиатуры для ввода email
+        textField.borderStyle = .roundedRect // Закругленные края текстового поля
+        textField.addTarget(self, action: #selector(textFieldsDidChange), for: .editingChanged) // Добавляем таргет для отслеживания изменения текста
         return textField
     }()
     
-    // Поле ввода для пароля
-    private lazy var passwordTextFieldLazy: UITextField = {
+    // Поле для ввода пароля
+    private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Password"  // Подсказка в поле ввода
-        textField.backgroundColor = .systemGray6  // Фон поля ввода
-        textField.layer.borderWidth = 0.5  // Толщина границы поля ввода
-        textField.layer.borderColor = UIColor.lightGray.cgColor  // Цвет границы
-        textField.layer.cornerRadius = 10  // Закругленные углы
-        textField.layer.masksToBounds = true  // Обрезаем содержимое по границам
-        textField.isSecureTextEntry = true  // Ввод текста с маскировкой
-        textField.autocorrectionType = .no  // Отключение автокоррекции
-        textField.returnKeyType = .done  // Тип клавиши возврата (готово)
-        textField.translatesAutoresizingMaskIntoConstraints = false  // Отключаем автоматические констрейнты
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
-        textField.leftView = paddingView  // Добавляем отступ слева
-        textField.leftViewMode = .always
+        textField.placeholder = "Password" // Подсказка внутри текстового поля
+        textField.isSecureTextEntry = true // Текст скрыт, как обычно для пароля
+        textField.borderStyle = .roundedRect // Закругленные края текстового поля
+        textField.addTarget(self, action: #selector(textFieldsDidChange), for: .editingChanged) // Добавляем таргет для отслеживания изменения текста
         return textField
     }()
     
-    // Кнопка для выполнения логина
-    private lazy var loginButton: CustomButton = {
-        let button = CustomButton(
-            title: "Log In",  // Текст на кнопке
-            titleColor: .white,  // Цвет текста кнопки
-            backgroundColor: .systemBlue,  // Цвет фона кнопки
-            font: UIFont.systemFont(ofSize: 16)  // Шрифт текста на кнопке
-        ) { [weak self] in
-            self?.loginButtonTapped()  // Действие при нажатии кнопки
-        }
-        if let bluePixel = UIImage(named: "blue_pixel") {
-            button.setBackgroundImage(bluePixel.stretchableImage(withLeftCapWidth: 0, topCapHeight: 0), for: .normal)  // Установка фонового изображения для кнопки
-        }
-        return button
-    }()
-    
-    // Изображение иконки приложения
-    private lazy var appIconImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "app icon"))
-        imageView.contentMode = .scaleAspectFit  // Режим отображения содержимого
-        imageView.translatesAutoresizingMaskIntoConstraints = false  // Отключаем автоматические констрейнты
-        return imageView
-    }()
-    
-    // Кнопка для запуска brute force атаки на пароль
-    private lazy var bruteForceButton: UIButton = {
+    // Кнопка для входа
+    private lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Подобрать пароль", for: .normal)  // Текст на кнопке
-        button.addTarget(self, action: #selector(didTapBruteForceButton), for: .touchUpInside)  // Действие при нажатии кнопки
-        button.translatesAutoresizingMaskIntoConstraints = false  // Отключаем автоматические констрейнты
+        button.setTitle("Login", for: .normal) // Заголовок кнопки
+        button.isEnabled = false  // Кнопка отключена по умолчанию, включается только если оба поля заполнены
+        button.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside) // Добавляем таргет для нажатия на кнопку
         return button
     }()
     
-    // Индикатор активности (спиннер)
-    private lazy var activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .large)
-        indicator.translatesAutoresizingMaskIntoConstraints = false  // Отключаем автоматические констрейнты
-        return indicator
+    // Кнопка для регистрации
+    private lazy var signUpButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Sign Up", for: .normal) // Заголовок кнопки
+        button.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside) // Добавляем таргет для нажатия на кнопку
+        return button
     }()
     
-    let passwordBruteForcer = PasswordBruteForcer()  // Инициализация класса для подбора пароля
-    
+    // Метод, вызываемый при загрузке ViewController
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGray6  // Устанавливаем цвет фона
-        title = "Login"  // Устанавливаем заголовок контроллера
-        setupView()  // Настраиваем элементы интерфейса
-        setupConstraints()  // Настраиваем констрейнты
-        setupKeyboardObservers()  // Настраиваем наблюдателей за клавиатурой
+        view.backgroundColor = .systemBackground // Устанавливаем цвет фона
+        checkerService = CheckerService() // Инициализация сервиса проверки учетных данных
+        setupView() // Настройка интерфейса
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupKeyboardObservers()  // Настраиваем наблюдателей за клавиатурой перед появлением view
+    // Метод для проверки заполненности текстовых полей и включения кнопки логина
+    @objc private func textFieldsDidChange() {
+        let isEmailFilled = !(emailTextField.text?.isEmpty ?? true) // Проверяем, что поле email не пустое
+        let isPasswordFilled = !(passwordTextField.text?.isEmpty ?? true) // Проверяем, что поле пароля не пустое
+        loginButton.isEnabled = isEmailFilled && isPasswordFilled // Кнопка активируется, если оба поля заполнены
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        removeKeyboardObservers()  // Удаляем наблюдателей за клавиатурой перед исчезновением view
+    // Метод, вызываемый при нажатии на кнопку Login
+    @objc private func loginButtonTapped() {
+        guard let email = emailTextField.text, let password = passwordTextField.text else { return } // Проверка на заполненность полей
+        
+        // Проверка учетных данных через сервис
+        checkerService?.checkCredentials(email: email, password: password) { [weak self] result in
+            switch result {
+            case .success:
+                // Если вход успешен, вызываем метод завершения логина у координатора
+                self?.coordinator?.didFinishLogin()
+            case .failure(let error):
+                // В случае ошибки показываем алерт с описанием ошибки
+                self?.showError(error)
+            }
+        }
     }
     
+    // Метод, вызываемый при нажатии на кнопку Sign Up
+    @objc private func signUpButtonTapped() {
+        guard let email = emailTextField.text, let password = passwordTextField.text else { return } // Проверка на заполненность полей
+        
+        // Регистрация нового пользователя через сервис
+        checkerService?.signUp(email: email, password: password) { [weak self] result in
+            switch result {
+            case .success:
+                // Если регистрация успешна, вызываем метод завершения логина у координатора
+                self?.coordinator?.didFinishLogin()
+            case .failure(let error):
+                // В случае ошибки показываем алерт с описанием ошибки
+                self?.showError(error)
+            }
+        }
+    }
+    
+    // Метод для отображения ошибки через UIAlertController
+    private func showError(_ error: Error) {
+        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
+    // Настройка и добавление элементов интерфейса на экран
     private func setupView() {
-        view.addSubview(appIconImageView)  // Добавляем иконку приложения
-        view.addSubview(emailOrPhoneTextField)  // Добавляем поле ввода email или телефона
-        view.addSubview(passwordTextFieldLazy)  // Добавляем поле ввода пароля
-        view.addSubview(loginButton)  // Добавляем кнопку входа
-        view.addSubview(bruteForceButton)  // Добавляем кнопку подбора пароля
-        view.addSubview(activityIndicator)  // Добавляем индикатор активности
+        view.addSubview(emailTextField)
+        view.addSubview(passwordTextField)
+        view.addSubview(loginButton)
+        view.addSubview(signUpButton)
+        setupConstraints() // Устанавливаем ограничения для элементов интерфейса
     }
-    
+
+    // Установка ограничений для элементов интерфейса
     private func setupConstraints() {
+        emailTextField.translatesAutoresizingMaskIntoConstraints = false
+        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+        loginButton.translatesAutoresizingMaskIntoConstraints = false
+        signUpButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Устанавливаем ограничения для элементов на экране
         NSLayoutConstraint.activate([
-            // Констрейнты для иконки AppIcon
-            appIconImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            appIconImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            appIconImageView.widthAnchor.constraint(equalToConstant: 100),
-            appIconImageView.heightAnchor.constraint(equalToConstant: 100),
+            emailTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor), // Центрируем emailTextField по горизонтали
+            emailTextField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100), // Устанавливаем отступ сверху
+            emailTextField.widthAnchor.constraint(equalToConstant: 200), // Ширина поля
+            emailTextField.heightAnchor.constraint(equalToConstant: 40), // Высота поля
             
-            // Констрейнты для поля ввода логина
-            emailOrPhoneTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            emailOrPhoneTextField.topAnchor.constraint(equalTo: appIconImageView.bottomAnchor, constant: 30),
-            emailOrPhoneTextField.widthAnchor.constraint(equalToConstant: 200),
-            emailOrPhoneTextField.heightAnchor.constraint(equalToConstant: 50),
+            passwordTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor), // Центрируем passwordTextField по горизонтали
+            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20), // Отступ от emailTextField
+            passwordTextField.widthAnchor.constraint(equalToConstant: 200), // Ширина поля
+            passwordTextField.heightAnchor.constraint(equalToConstant: 40), // Высота поля
             
-            // Констрейнты для поля ввода пароля
-            passwordTextFieldLazy.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            passwordTextFieldLazy.topAnchor.constraint(equalTo: emailOrPhoneTextField.bottomAnchor, constant: 10),
-            passwordTextFieldLazy.widthAnchor.constraint(equalToConstant: 200),
-            passwordTextFieldLazy.heightAnchor.constraint(equalToConstant: 50),
+            loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor), // Центрируем loginButton по горизонтали
+            loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 20), // Отступ от passwordTextField
+            loginButton.widthAnchor.constraint(equalToConstant: 200), // Ширина кнопки
+            loginButton.heightAnchor.constraint(equalToConstant: 40), // Высота кнопки
             
-            // Констрейнты для кнопки входа
-            loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            loginButton.topAnchor.constraint(equalTo: passwordTextFieldLazy.bottomAnchor, constant: 20),
-            loginButton.widthAnchor.constraint(equalToConstant: 200),
-            loginButton.heightAnchor.constraint(equalToConstant: 50),
-            
-            // Констрейнты для кнопки подбора пароля
-            bruteForceButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            bruteForceButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20),
-            
-            // Констрейнты для индикатора активности
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.topAnchor.constraint(equalTo: bruteForceButton.bottomAnchor, constant: 20)
+            signUpButton.centerXAnchor.constraint(equalTo: view.centerXAnchor), // Центрируем signUpButton по горизонтали
+            signUpButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20), // Отступ от loginButton
+            signUpButton.widthAnchor.constraint(equalToConstant: 200), // Ширина кнопки
+            signUpButton.heightAnchor.constraint(equalToConstant: 40) // Высота кнопки
         ])
     }
-    
-    @objc func loginButtonTapped() {
-        guard let login = emailOrPhoneTextField.text, let password = passwordTextFieldLazy.text else {
-            showErrorAlert(message: "Please enter both username and password.")  // Отображаем сообщение об ошибке
-            return
-        }
-        
-        let result = authenticateUser(login: login, password: password)  // Пытаемся авторизовать пользователя
-        
-        switch result {
-        case .success(_):
-            coordinator?.didFinishLogin()  // Завершаем процесс логина при успешной проверке
-        case .failure(let error):
-            handleError(error)  // Обрабатываем ошибку
-        }
-    }
-    
-    // Метод для проверки логина и пароля с использованием Checker
-    private func authenticateUser(login: String, password: String) -> Result<AuthenticationSuccess, LoginError> {
-        // Проверка длины логина
-        guard login.count >= 1 else {
-            return .failure(.invalidUsernameLength)
-        }
-        
-        // Проверка длины пароля
-        guard password.count >= 1 else {
-            return .failure(.invalidPasswordLength)
-        }
-        
-        // Используем Checker для проверки логина и пароля
-        let isAuthenticated = Checker.shared.check(login: login, password: password)
 
-        if isAuthenticated {
-            let success = AuthenticationSuccess(username: login)
-            return .success(success)
-        } else {
-            return .failure(.authenticationFailed)
-        }
-    }
-
-    // Метод для обработки ошибок
-    private func handleError(_ error: LoginError) {
-        var message = ""
-        
-        switch error {
-        case .invalidUsernameLength:
-            message = "Username must be at least 6 characters long."
-        case .invalidPasswordLength:
-            message = "Password must be at least 8 characters long."
-        case .authenticationFailed:
-            message = "Authentication failed. Please check your credentials."
-        }
-        
-        showErrorAlert(message: message)  // Показываем сообщение об ошибке
-    }
-
-    // Метод для отображения ошибки с помощью Alert
-    private func showErrorAlert(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
-    }
-    
-    @objc func didTapBruteForceButton() {
-        passwordTextFieldLazy.isSecureTextEntry = true  // Делаем поле пароля защищенным
-        activityIndicator.startAnimating()  // Запускаем индикатор активности
-        
-        let randomPassword = generateRandomPassword(length: 4)  // Генерируем случайный пароль
-        print("Randomly generated password: \(randomPassword)")
-        
-        passwordBruteForcer.bruteForce(passwordToUnlock: randomPassword) { [weak self] foundPassword in
-            guard let self = self else { return }
-            self.activityIndicator.stopAnimating()  // Останавливаем индикатор активности
-            self.passwordTextFieldLazy.isSecureTextEntry = false  // Делаем пароль видимым
-            self.passwordTextFieldLazy.text = foundPassword  // Отображаем найденный пароль
-            print("Password found: \(foundPassword)")
-        }
-    }
-    
-    func generateRandomPassword(length: Int) -> String {
-        let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        return String((0..<length).map { _ in characters.randomElement()! })  // Генерируем случайный пароль
-    }
-    
-    // MARK: - Обработка клавиатуры
-    
-    private func setupKeyboardObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(willShowKeyboard(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(willHideKeyboard(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    private func removeKeyboardObservers() {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    @objc func willShowKeyboard(_ notification: Notification) {
-        guard let userInfo = notification.userInfo,
-              let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
-        _ = keyboardFrame.cgRectValue.height  // Получаем высоту клавиатуры
-    }
-    
-    @objc func willHideKeyboard(_ notification: Notification) {}
 }

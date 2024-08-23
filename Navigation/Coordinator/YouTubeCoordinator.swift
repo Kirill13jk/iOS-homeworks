@@ -1,7 +1,7 @@
 import UIKit
 
 // Координатор для модуля ленты новостей
-class YouTybeCoordinator: Coordinator {
+class YouTubeCoordinator: Coordinator {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
 

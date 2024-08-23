@@ -2,7 +2,7 @@ import UIKit
 import YouTubeiOSPlayerHelper
 
 class YouTubeViewController: UIViewController, YTPlayerViewDelegate {
-    weak var coordinator: YouTybeCoordinator?
+    weak var coordinator: YouTubeCoordinator?
     
     var playerView: YTPlayerView! // YouTube проигрыватель
     var videoTableView: UITableView! // Таблица для отображения списка видео

@@ -12,16 +12,15 @@ class LoginCoordinator: Coordinator {
         self.loginFactory = loginFactory
     }
 
-    // Запуск координатора авторизации
     func start() {
         let loginViewController = LoginViewController()
         loginViewController.coordinator = self
-        loginViewController.loginDelegate = loginFactory.makeLoginInspector()
+        loginViewController.checkerService = loginFactory.makeLoginInspector()
         navigationController.pushViewController(loginViewController, animated: true)
     }
 
-    // Завершение авторизации и уведомление родительского координатора
     func didFinishLogin() {
         parentCoordinator?.didFinishLogin()
     }
 }
+

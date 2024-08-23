@@ -1,26 +1,19 @@
 import UIKit
+import FirebaseAuth
 import StorageService
 
+
 class ProfileViewController: UIViewController {
-    // Слабая ссылка на координатор для избежания циклов сильных ссылок
     weak var coordinator: ProfileCoordinator?
 
-    // Создаем таблицу для отображения данных профиля и постов
     private let tableView = UITableView()
-    // Создаем заголовок для профиля
     private let profileHeaderView = ProfileHeaderView()
-    // Оверлей для анимации увеличения аватара
     private let overlayView = UIView()
-    // Кнопка закрытия увеличенного аватара
     private let closeButton = UIButton(type: .system)
-    // Оригинальная позиция аватара для анимации
     private var avatarOriginalFrame: CGRect?
-    // Увеличенный аватар для анимации
     private var enlargedAvatarImageView: UIImageView?
-    // Пользователь, информация о котором будет отображена
     var user: User?
     
-    // Поле для аватара пользователя
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -36,12 +29,11 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(logOutTapped))
         
-        // Настройка профиля
         setupProfile()
-        // Настройка UI элементов
         setupUI()
-        // Настройка таблицы и заголовка
         setupTableView()
         setupTableHeaderView()
 
@@ -50,22 +42,33 @@ class ProfileViewController: UIViewController {
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: "PostCell")
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosCell")
 
-        // Подписываемся на уведомление о нажатии на аватар
         NotificationCenter.default.addObserver(self, selector: #selector(handleAvatarTapped(_:)), name: NSNotification.Name("AvatarTapped"), object: nil)
     }
     
-    // Метод для настройки профиля пользователя
+    private func setupLogoutButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(logOutTapped))
+    }
+
+    @objc private func logOutTapped() {
+        do {
+            try Auth.auth().signOut()  // Выполняем выход из Firebase
+            coordinator?.didFinishLogout()  // Сообщаем координатору о завершении сессии
+        } catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
+            // Здесь можно добавить отображение ошибки для пользователя
+        }
+    }
+
+    
     private func setupProfile() {
         guard let user = user else { return }
         avatarImageView.image = user.avatar
     }
 
-    // Метод для настройки UI элементов
     private func setupUI() {
-        view.addSubview(tableView) // Добавляем таблицу на главный view
+        view.addSubview(tableView)
     }
 
-    // Метод для настройки таблицы
     private func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -76,27 +79,18 @@ class ProfileViewController: UIViewController {
         ])
     }
 
-    // Настройка заголовка таблицы
     private func setupTableHeaderView() {
-        // Устанавливаем frame для profileHeaderView
         profileHeaderView.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 200)
-        
-        // Добавляем avatarImageView в profileHeaderView
         profileHeaderView.addSubview(avatarImageView)
-        
-        // Настройка констрейнтов для avatarImageView внутри profileHeaderView
         NSLayoutConstraint.activate([
             avatarImageView.centerXAnchor.constraint(equalTo: profileHeaderView.centerXAnchor),
             avatarImageView.topAnchor.constraint(equalTo: profileHeaderView.topAnchor, constant: 50),
             avatarImageView.widthAnchor.constraint(equalToConstant: 100),
             avatarImageView.heightAnchor.constraint(equalToConstant: 100)
         ])
-        
-        // Установка profileHeaderView как tableHeaderView таблицы
         tableView.tableHeaderView = profileHeaderView
     }
 
-    // Метод для обработки нажатия на аватар
     @objc private func handleAvatarTapped(_ notification: Notification) {
         guard let avatarImageView = notification.object as? UIImageView else { return }
 
@@ -138,7 +132,6 @@ class ProfileViewController: UIViewController {
         }
     }
 
-    // Метод для обработки нажатия на кнопку закрытия
     @objc private func handleCloseButton() {
         guard let enlargedAvatarImageView = self.enlargedAvatarImageView else { return }
 
@@ -157,13 +150,17 @@ class ProfileViewController: UIViewController {
         }
     }
 
-    // Метод для обработки нажатия на аватар
     @objc private func avatarTapped() {
         NotificationCenter.default.post(name: NSNotification.Name("AvatarTapped"), object: avatarImageView)
     }
+
+    private func showErrorAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
 }
 
-// Расширение для поддержки таблицы
 extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -194,11 +191,11 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return nil // Убираем заголовок секции
+        return nil
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0 // Устанавливаем высоту заголовка секции в 0
+        return 0
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

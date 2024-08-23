@@ -2,7 +2,11 @@
 
 import Foundation
 
-// Протокол делегата для проверки логина и пароля
+// Протокол для взаимодействия с LoginViewController
 protocol LoginViewControllerDelegate: AnyObject {
-    func check(login: String, password: String) -> Bool
+    // Метод для проверки учетных данных
+    func checkCredentials(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void)
+    
+    // Метод для регистрации нового пользователя
+    func signUp(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void)
 }

@@ -31,9 +31,32 @@ class AppCoordinator: Coordinator {
         showMain()
     }
 
+    // Метод для выхода из аккаунта
+    func didFinishLogout() {
+        // Очищаем текущий стек представлений
+        childCoordinators.removeAll()
+        
+        // Создаем новый экземпляр LoginViewController
+        let loginFactory = MyLoginFactory()
+        let loginCoordinator = LoginCoordinator(navigationController: UINavigationController(), loginFactory: loginFactory)
+        loginCoordinator.parentCoordinator = self
+        childCoordinators.append(loginCoordinator)
+        
+        loginCoordinator.start()
+        
+        // Находим активное окно (UIWindow)
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            if let window = windowScene.windows.first {
+                window.rootViewController = loginCoordinator.navigationController
+                window.makeKeyAndVisible()
+            }
+        }
+    }
+
     // Отображение основной части приложения
     private func showMain() {
         let profileCoordinator = ProfileCoordinator(navigationController: UINavigationController())
+        profileCoordinator.parentCoordinator = self // Устанавливаем parentCoordinator
         profileCoordinator.start()
         childCoordinators.append(profileCoordinator)
 
@@ -45,7 +68,7 @@ class AppCoordinator: Coordinator {
         trackCoordinator.start()
         childCoordinators.append(trackCoordinator)
         
-        let youtubeCoordinator = YouTybeCoordinator(navigationController: UINavigationController())
+        let youtubeCoordinator = YouTubeCoordinator(navigationController: UINavigationController())
         youtubeCoordinator.start()
         childCoordinators.append(youtubeCoordinator)
         

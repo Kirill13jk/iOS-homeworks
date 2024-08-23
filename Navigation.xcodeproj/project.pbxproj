@@ -12,8 +12,9 @@
 		A216761C2C5A49C6001C904E /* TrackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216761B2C5A49C6001C904E /* TrackViewController.swift */; };
 		A216762C2C5D0E90001C904E /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = A216762B2C5D0E90001C904E /* YouTubeiOSPlayerHelper */; };
 		A216762E2C5D0EA9001C904E /* YouTubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216762D2C5D0EA9001C904E /* YouTubeViewController.swift */; };
-		A21676302C5D0F7E001C904E /* YouTybeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A216762F2C5D0F7E001C904E /* YouTybeCoordinator.swift */; };
 		A21CA7282C0C7303000144FC /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21CA7272C0C7303000144FC /* PhotosTableViewCell.swift */; };
+		A2483F902C77A1F30024F21A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2483F8F2C77A1F30024F21A /* GoogleService-Info.plist */; };
+		A2483F942C78C2FC0024F21A /* YouTubeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2483F932C78C2FC0024F21A /* YouTubeCoordinator.swift */; };
 		A249CE3B2C6A3AB500AF2A23 /* InfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A249CE3A2C6A3AB500AF2A23 /* InfoCoordinator.swift */; };
 		A249CE3E2C6B82F500AF2A23 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A249CE3D2C6B82F500AF2A23 /* Planet.swift */; };
 		A263BAF32C0C739F005EDA68 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263BAF22C0C739F005EDA68 /* PhotosViewController.swift */; };
@@ -29,7 +30,6 @@
 		A285EFC32C49472E00910A57 /* LoginViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A285EFC22C49472E00910A57 /* LoginViewControllerDelegate.swift */; };
 		A285EFC82C4A8EC600910A57 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = A285EFC72C4A8EC600910A57 /* iOSIntPackage */; };
 		A285EFCA2C4BE14D00910A57 /* PasswordBruteForcer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A285EFC92C4BE14D00910A57 /* PasswordBruteForcer.swift */; };
-		A2922B412C2EBED800B681A8 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2922B402C2EBED800B681A8 /* Checker.swift */; };
 		A2922B4C2C3023F000B681A8 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2922B4B2C3023F000B681A8 /* LoginFactory.swift */; };
 		A2922B4E2C30477600B681A8 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2922B4D2C30477600B681A8 /* LoginInspector.swift */; };
 		A29285E52BF9F4C1000F1271 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29285E42BF9F4C1000F1271 /* PostViewController.swift */; };
@@ -54,6 +54,9 @@
 		A2D44FE22BF9E8BA00BBE32A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = A2D44FE12BF9E8BA00BBE32A /* Base */; };
 		A2D44FE42BF9E8BC00BBE32A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2D44FE32BF9E8BC00BBE32A /* Assets.xcassets */; };
 		A2D44FE72BF9E8BC00BBE32A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = A2D44FE62BF9E8BC00BBE32A /* Base */; };
+		A2E94A4F2C76070700982D73 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A2E94A4E2C76070700982D73 /* FirebaseAuth */; };
+		A2E94A512C76070700982D73 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = A2E94A502C76070700982D73 /* FirebaseFirestore */; };
+		A2E94A552C772DA200982D73 /* CheckerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E94A542C772DA200982D73 /* CheckerService.swift */; };
 		A2F341A72C2193ED00AD0882 /* StorageService.docc in Sources */ = {isa = PBXBuildFile; fileRef = A2F341A62C2193ED00AD0882 /* StorageService.docc */; };
 		A2F341AD2C2193ED00AD0882 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2F341A32C2193EC00AD0882 /* StorageService.framework */; };
 		A2F341B42C2193ED00AD0882 /* StorageServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F341B32C2193ED00AD0882 /* StorageServiceTests.swift */; };
@@ -110,8 +113,9 @@
 		A21676192C5A46AF001C904E /* TrackCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCoordinator.swift; sourceTree = "<group>"; };
 		A216761B2C5A49C6001C904E /* TrackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackViewController.swift; sourceTree = "<group>"; };
 		A216762D2C5D0EA9001C904E /* YouTubeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeViewController.swift; sourceTree = "<group>"; };
-		A216762F2C5D0F7E001C904E /* YouTybeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTybeCoordinator.swift; sourceTree = "<group>"; };
 		A21CA7272C0C7303000144FC /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
+		A2483F8F2C77A1F30024F21A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A2483F932C78C2FC0024F21A /* YouTubeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeCoordinator.swift; sourceTree = "<group>"; };
 		A249CE3A2C6A3AB500AF2A23 /* InfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCoordinator.swift; sourceTree = "<group>"; };
 		A249CE3D2C6B82F500AF2A23 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		A263BAF22C0C739F005EDA68 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
@@ -125,7 +129,6 @@
 		A285EFC02C491F4F00910A57 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		A285EFC22C49472E00910A57 /* LoginViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegate.swift; sourceTree = "<group>"; };
 		A285EFC92C4BE14D00910A57 /* PasswordBruteForcer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordBruteForcer.swift; sourceTree = "<group>"; };
-		A2922B402C2EBED800B681A8 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		A2922B4B2C3023F000B681A8 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		A2922B4D2C30477600B681A8 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		A29285E22BF9F492000F1271 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -153,6 +156,7 @@
 		A2D44FE32BF9E8BC00BBE32A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A2D44FE62BF9E8BC00BBE32A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A2D44FE82BF9E8BC00BBE32A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A2E94A542C772DA200982D73 /* CheckerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerService.swift; sourceTree = "<group>"; };
 		A2F341A32C2193EC00AD0882 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2F341A52C2193EC00AD0882 /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
 		A2F341A62C2193ED00AD0882 /* StorageService.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = StorageService.docc; sourceTree = "<group>"; };
@@ -170,9 +174,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A285EFC82C4A8EC600910A57 /* iOSIntPackage in Frameworks */,
+				A2E94A4F2C76070700982D73 /* FirebaseAuth in Frameworks */,
 				A285EFB42C47E14700910A57 /* SnapKit in Frameworks */,
 				A2F341B82C2193ED00AD0882 /* StorageService.framework in Frameworks */,
 				A216762C2C5D0E90001C904E /* YouTubeiOSPlayerHelper in Frameworks */,
+				A2E94A512C76070700982D73 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,8 +242,8 @@
 				A285EFBE2C47E9D500910A57 /* FeedCoordinator.swift */,
 				A285EFC02C491F4F00910A57 /* LoginCoordinator.swift */,
 				A21676192C5A46AF001C904E /* TrackCoordinator.swift */,
-				A216762F2C5D0F7E001C904E /* YouTybeCoordinator.swift */,
 				A249CE3A2C6A3AB500AF2A23 /* InfoCoordinator.swift */,
+				A2483F932C78C2FC0024F21A /* YouTubeCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -247,7 +253,7 @@
 			children = (
 				A285EFC92C4BE14D00910A57 /* PasswordBruteForcer.swift */,
 				A2B618052BFA1823004FAFBB /* LogInViewController.swift */,
-				A2922B402C2EBED800B681A8 /* Checker.swift */,
+				A2E94A542C772DA200982D73 /* CheckerService.swift */,
 				A2922B4B2C3023F000B681A8 /* LoginFactory.swift */,
 				A2922B4D2C30477600B681A8 /* LoginInspector.swift */,
 				A285EFC22C49472E00910A57 /* LoginViewControllerDelegate.swift */,
@@ -288,18 +294,19 @@
 		A2D44FD92BF9E8BA00BBE32A /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				A249CE3C2C6B82DB00AF2A23 /* Info */,
 				A285EFC42C494F0600910A57 /* Coordinator */,
 				A2F341D32C24144700AD0882 /* Galery */,
 				A2F341D22C24142600AD0882 /* Post */,
 				A2F341D12C24069D00AD0882 /* User */,
 				A285EFC52C494F3700910A57 /* Login */,
 				A285EF392C3FC6FD00910A57 /* Feed */,
+				A249CE3C2C6B82DB00AF2A23 /* Info */,
 				A29285EC2BF9F55A000F1271 /* Profile */,
 				A21676312C5D1118001C904E /* Sound */,
 				A2D44FDA2BF9E8BA00BBE32A /* AppDelegate.swift */,
 				A2D44FDC2BF9E8BA00BBE32A /* SceneDelegate.swift */,
 				A2D44FDE2BF9E8BA00BBE32A /* ViewController.swift */,
+				A2483F8F2C77A1F30024F21A /* GoogleService-Info.plist */,
 				A2D44FE02BF9E8BA00BBE32A /* Main.storyboard */,
 				A2D44FE32BF9E8BC00BBE32A /* Assets.xcassets */,
 				A2D44FE52BF9E8BC00BBE32A /* LaunchScreen.storyboard */,
@@ -393,6 +400,8 @@
 				A285EFB32C47E14700910A57 /* SnapKit */,
 				A285EFC72C4A8EC600910A57 /* iOSIntPackage */,
 				A216762B2C5D0E90001C904E /* YouTubeiOSPlayerHelper */,
+				A2E94A4E2C76070700982D73 /* FirebaseAuth */,
+				A2E94A502C76070700982D73 /* FirebaseFirestore */,
 			);
 			productName = Navigation;
 			productReference = A2D44FD72BF9E8BA00BBE32A /* Navigation.app */;
@@ -470,6 +479,7 @@
 				A285EFB22C47E14700910A57 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				A285EFC62C4A8EC600910A57 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
 				A216762A2C5D0E90001C904E /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
+				A2E94A4D2C76070700982D73 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = A2D44FD82BF9E8BA00BBE32A /* Products */;
 			projectDirPath = "";
@@ -489,6 +499,7 @@
 			files = (
 				A2CE87A72C6393FE003823EB /* track3.mp3 in Resources */,
 				A2CE87A92C6393FE003823EB /* track4.mp3 in Resources */,
+				A2483F902C77A1F30024F21A /* GoogleService-Info.plist in Resources */,
 				A2CE87A82C6393FE003823EB /* track5.mp3 in Resources */,
 				A2D44FE42BF9E8BC00BBE32A /* Assets.xcassets in Resources */,
 				A2D44FE72BF9E8BC00BBE32A /* Base in Resources */,
@@ -523,7 +534,7 @@
 				A285EF382C3FC45000910A57 /* FeedViewModel.swift in Sources */,
 				A29285E72BF9F4E8000F1271 /* ProfileViewController.swift in Sources */,
 				A285EFB92C47E73700910A57 /* Coordinator.swift in Sources */,
-				A2922B412C2EBED800B681A8 /* Checker.swift in Sources */,
+				A2E94A552C772DA200982D73 /* CheckerService.swift in Sources */,
 				A285EFBF2C47E9D500910A57 /* FeedCoordinator.swift in Sources */,
 				A2D44FDF2BF9E8BA00BBE32A /* ViewController.swift in Sources */,
 				A2D44FDB2BF9E8BA00BBE32A /* AppDelegate.swift in Sources */,
@@ -531,7 +542,6 @@
 				A216761C2C5A49C6001C904E /* TrackViewController.swift in Sources */,
 				A285EFBB2C47E80800910A57 /* AppCoordinator.swift in Sources */,
 				A2D44FDD2BF9E8BA00BBE32A /* SceneDelegate.swift in Sources */,
-				A21676302C5D0F7E001C904E /* YouTybeCoordinator.swift in Sources */,
 				A216761A2C5A46AF001C904E /* TrackCoordinator.swift in Sources */,
 				A249CE3B2C6A3AB500AF2A23 /* InfoCoordinator.swift in Sources */,
 				A285EFCA2C4BE14D00910A57 /* PasswordBruteForcer.swift in Sources */,
@@ -542,6 +552,7 @@
 				A285EFC12C491F4F00910A57 /* LoginCoordinator.swift in Sources */,
 				A2A6BC1E2C3C09E400A91E69 /* FeedModel.swift in Sources */,
 				A2F341CE2C2405CB00AD0882 /* UserService.swift in Sources */,
+				A2483F942C78C2FC0024F21A /* YouTubeCoordinator.swift in Sources */,
 				A29285E52BF9F4C1000F1271 /* PostViewController.swift in Sources */,
 				A29285EB2BF9F543000F1271 /* InfoViewController.swift in Sources */,
 				A2B618062BFA1823004FAFBB /* LogInViewController.swift in Sources */,
@@ -966,6 +977,14 @@
 				minimumVersion = 3.2.3;
 			};
 		};
+		A2E94A4D2C76070700982D73 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -983,6 +1002,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A285EFC62C4A8EC600910A57 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
 			productName = iOSIntPackage;
+		};
+		A2E94A4E2C76070700982D73 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A2E94A4D2C76070700982D73 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		A2E94A502C76070700982D73 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A2E94A4D2C76070700982D73 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

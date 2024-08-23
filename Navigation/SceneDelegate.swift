@@ -1,9 +1,17 @@
 import UIKit
+import Foundation
+
+enum AppConfiguration {
+    case people(URL)
+    case starships(URL)
+    case planets(URL)
+}
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     var appCoordinator: AppCoordinator?
+    
     var appConfiguration: AppConfiguration? // Переменная для хранения
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {

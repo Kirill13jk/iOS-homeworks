@@ -1,52 +1,44 @@
 import Foundation
 
-// Обьявляем перечисление AppConfiguration для хранения различный конфигурация API
-enum AppConfiguration {
-    case people(URL)
-    case starships(URL)
-    case planets(URL)
+// Протокол, определяющий интерфейс для сетевых сервисов.
+protocol APIService {
+    func fetchData<T: Decodable>(url: URL, completion: @escaping (Result<T, Error>) -> Void)
 }
 
 struct NetworkService {
-    // статический метод repuest принимает параметр типа AppConfiguration
     static func request(for configuration: AppConfiguration) {
-        let urlString: String // Обьявляем переменую для хранения строки URL
-        
-        // Используем оператор switch для извлечения URL из конфигурации
-        switch configuration {
-        case .people(let url):
-            urlString = url.absoluteString // Присваем значение URL для people
-        case .starships(let url):
-            urlString = url.absoluteString //для starships
-        case .planets(let url):
-            urlString = url.absoluteString // для planets
-        }
-        
-        // Преобразуем строку URL в обьект URL
-        guard let url = URL(string: urlString) else { return }
-        
-        // Создаем задачу URLSession для выполнения сетевого запроса
+        // Реализация сетевого запроса
+        // Пример:
+        print("Requesting data for configuration: \(configuration)")
+        // Здесь должен быть ваш код для выполнения сетевого запроса
+    }
+}
+
+// Реализация сетевого менеджера, который управляет сетевыми запросами.
+class NetworkManager: APIService {
+    // Универсальный метод для загрузки данных из сети и их декодирования в указанный тип.
+    func fetchData<T: Decodable>(url: URL, completion: @escaping (Result<T, Error>) -> Void) {
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
-                
-            // Проверяем наличие ошибки
+            // Обрабатываем возможную ошибку.
             if let error = error {
-                print("Error: \(error.localizedDescription)") // Выводим сообщение об ошибки
+                completion(.failure(error))
                 return
             }
             
-            // Преобразуем ответ в HTTPURLResponse для извлечения статуса и заголовка
-            guard let httpResponse = response as? HTTPURLResponse else { return }
-            print("Status Code: \(httpResponse.statusCode)") // Выводим статус код ответа
-            print("Headers: \(httpResponse.allHeaderFields)") // Выводим заголовки ответа
+            // Проверяем, что данные были получены.
+            guard let data = data else {
+                completion(.failure(NSError(domain: "No data", code: -1, userInfo: nil)))
+                return
+            }
             
-            // Провереям наличие данных в ответе
-            if let data = data {
-                // Преобразуем данные в строке и выводим их
-                print("Data: \(String(data: data, encoding: .utf8) ?? "No data")")
+            do {
+                // Декодируем полученные данные в указанный тип модели.
+                let decodedData = try JSONDecoder().decode(T.self, from: data)
+                completion(.success(decodedData))
+            } catch {
+                completion(.failure(error)) // Обрабатываем возможную ошибку декодирования.
             }
         }
-                      
-        // Запускаем задачу
-        task.resume()
+        task.resume() // Запускаем задачу.
     }
 }
