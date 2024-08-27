@@ -15,6 +15,8 @@
 		A21CA7282C0C7303000144FC /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21CA7272C0C7303000144FC /* PhotosTableViewCell.swift */; };
 		A2483F902C77A1F30024F21A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2483F8F2C77A1F30024F21A /* GoogleService-Info.plist */; };
 		A2483F942C78C2FC0024F21A /* YouTubeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2483F932C78C2FC0024F21A /* YouTubeCoordinator.swift */; };
+		A2483F962C7D86ED0024F21A /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2483F952C7D86ED0024F21A /* DocumentsViewController.swift */; };
+		A2483F982C7D872C0024F21A /* DocumentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2483F972C7D872C0024F21A /* DocumentCoordinator.swift */; };
 		A249CE3B2C6A3AB500AF2A23 /* InfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A249CE3A2C6A3AB500AF2A23 /* InfoCoordinator.swift */; };
 		A249CE3E2C6B82F500AF2A23 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A249CE3D2C6B82F500AF2A23 /* Planet.swift */; };
 		A263BAF32C0C739F005EDA68 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263BAF22C0C739F005EDA68 /* PhotosViewController.swift */; };
@@ -116,6 +118,8 @@
 		A21CA7272C0C7303000144FC /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		A2483F8F2C77A1F30024F21A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A2483F932C78C2FC0024F21A /* YouTubeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeCoordinator.swift; sourceTree = "<group>"; };
+		A2483F952C7D86ED0024F21A /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
+		A2483F972C7D872C0024F21A /* DocumentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentCoordinator.swift; sourceTree = "<group>"; };
 		A249CE3A2C6A3AB500AF2A23 /* InfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCoordinator.swift; sourceTree = "<group>"; };
 		A249CE3D2C6B82F500AF2A23 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		A263BAF22C0C739F005EDA68 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
@@ -244,6 +248,7 @@
 				A21676192C5A46AF001C904E /* TrackCoordinator.swift */,
 				A249CE3A2C6A3AB500AF2A23 /* InfoCoordinator.swift */,
 				A2483F932C78C2FC0024F21A /* YouTubeCoordinator.swift */,
+				A2483F972C7D872C0024F21A /* DocumentCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -314,6 +319,7 @@
 				A29A17DB2C3A8AA700E9B4AA /* CustomButton.swift */,
 				A21676152C5113DF001C904E /* AppError.swift */,
 				A2CE87AA2C6398B4003823EB /* NetworkService.swift */,
+				A2483F952C7D86ED0024F21A /* DocumentsViewController.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -531,6 +537,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A285EFC32C49472E00910A57 /* LoginViewControllerDelegate.swift in Sources */,
+				A2483F982C7D872C0024F21A /* DocumentCoordinator.swift in Sources */,
 				A285EF382C3FC45000910A57 /* FeedViewModel.swift in Sources */,
 				A29285E72BF9F4E8000F1271 /* ProfileViewController.swift in Sources */,
 				A285EFB92C47E73700910A57 /* Coordinator.swift in Sources */,
@@ -568,6 +575,7 @@
 				A263BAF32C0C739F005EDA68 /* PhotosViewController.swift in Sources */,
 				A2CE87AB2C6398B4003823EB /* NetworkService.swift in Sources */,
 				A29285E92BF9F51C000F1271 /* FeedViewController.swift in Sources */,
+				A2483F962C7D86ED0024F21A /* DocumentsViewController.swift in Sources */,
 				A263BAF92C0DE026005EDA68 /* PhotosTableViewController.swift in Sources */,
 				A2B6180E2BFE623F004FAFBB /* PostTableViewCell.swift in Sources */,
 			);

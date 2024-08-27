@@ -76,12 +76,17 @@ class AppCoordinator: Coordinator {
         infoCoordinator.start()
         childCoordinators.append(infoCoordinator)
         
+        let documentCoordinator = DocumentCoordinator(navigationController: UINavigationController())
+        documentCoordinator.start()
+        childCoordinators.append(documentCoordinator)
+        
         tabBarController.viewControllers = [
             profileCoordinator.navigationController,
             feedCoordinator.navigationController,
             trackCoordinator.navigationController,
             youtubeCoordinator.navigationController,
-            infoCoordinator.navigationController
+            infoCoordinator.navigationController,
+            documentCoordinator.navigationController
         ]
 
         navigationController.viewControllers = [tabBarController]
