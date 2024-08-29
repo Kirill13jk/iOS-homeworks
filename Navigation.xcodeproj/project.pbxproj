@@ -17,6 +17,8 @@
 		A2483F942C78C2FC0024F21A /* YouTubeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2483F932C78C2FC0024F21A /* YouTubeCoordinator.swift */; };
 		A2483F962C7D86ED0024F21A /* DocumentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2483F952C7D86ED0024F21A /* DocumentsViewController.swift */; };
 		A2483F982C7D872C0024F21A /* DocumentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2483F972C7D872C0024F21A /* DocumentCoordinator.swift */; };
+		A2483F9A2C8058F50024F21A /* FileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2483F992C8058F50024F21A /* FileService.swift */; };
+		A2483F9C2C805BDC0024F21A /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2483F9B2C805BDC0024F21A /* ImageDetailViewController.swift */; };
 		A249CE3B2C6A3AB500AF2A23 /* InfoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A249CE3A2C6A3AB500AF2A23 /* InfoCoordinator.swift */; };
 		A249CE3E2C6B82F500AF2A23 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A249CE3D2C6B82F500AF2A23 /* Planet.swift */; };
 		A263BAF32C0C739F005EDA68 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A263BAF22C0C739F005EDA68 /* PhotosViewController.swift */; };
@@ -120,6 +122,8 @@
 		A2483F932C78C2FC0024F21A /* YouTubeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeCoordinator.swift; sourceTree = "<group>"; };
 		A2483F952C7D86ED0024F21A /* DocumentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsViewController.swift; sourceTree = "<group>"; };
 		A2483F972C7D872C0024F21A /* DocumentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentCoordinator.swift; sourceTree = "<group>"; };
+		A2483F992C8058F50024F21A /* FileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileService.swift; sourceTree = "<group>"; };
+		A2483F9B2C805BDC0024F21A /* ImageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailViewController.swift; sourceTree = "<group>"; };
 		A249CE3A2C6A3AB500AF2A23 /* InfoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCoordinator.swift; sourceTree = "<group>"; };
 		A249CE3D2C6B82F500AF2A23 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		A263BAF22C0C739F005EDA68 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
@@ -320,6 +324,8 @@
 				A21676152C5113DF001C904E /* AppError.swift */,
 				A2CE87AA2C6398B4003823EB /* NetworkService.swift */,
 				A2483F952C7D86ED0024F21A /* DocumentsViewController.swift */,
+				A2483F992C8058F50024F21A /* FileService.swift */,
+				A2483F9B2C805BDC0024F21A /* ImageDetailViewController.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -556,6 +562,7 @@
 				A2F341CC2C2405A200AD0882 /* User.swift in Sources */,
 				A29285EE2BF9F57D000F1271 /* ProfileHeaderView.swift in Sources */,
 				A249CE3E2C6B82F500AF2A23 /* Planet.swift in Sources */,
+				A2483F9A2C8058F50024F21A /* FileService.swift in Sources */,
 				A285EFC12C491F4F00910A57 /* LoginCoordinator.swift in Sources */,
 				A2A6BC1E2C3C09E400A91E69 /* FeedModel.swift in Sources */,
 				A2F341CE2C2405CB00AD0882 /* UserService.swift in Sources */,
@@ -570,6 +577,7 @@
 				A2B6180C2BFE5DA3004FAFBB /* ProfileTableHeaderView.swift in Sources */,
 				A263BAF52C0C73BE005EDA68 /* PhotosCollectionViewCell.swift in Sources */,
 				A29A17DC2C3A8AA700E9B4AA /* CustomButton.swift in Sources */,
+				A2483F9C2C805BDC0024F21A /* ImageDetailViewController.swift in Sources */,
 				A216762E2C5D0EA9001C904E /* YouTubeViewController.swift in Sources */,
 				A2922B4E2C30477600B681A8 /* LoginInspector.swift in Sources */,
 				A263BAF32C0C739F005EDA68 /* PhotosViewController.swift in Sources */,
