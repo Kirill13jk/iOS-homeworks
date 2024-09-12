@@ -80,13 +80,19 @@ class AppCoordinator: Coordinator {
         documentCoordinator.start()
         childCoordinators.append(documentCoordinator)
         
+        let favoriteCoordinator = FavoriteCoordinator(navigationController: UINavigationController())
+        favoriteCoordinator.start()
+        childCoordinators.append(favoriteCoordinator)
+        
         tabBarController.viewControllers = [
             profileCoordinator.navigationController,
             feedCoordinator.navigationController,
+            favoriteCoordinator.navigationController,
             trackCoordinator.navigationController,
             youtubeCoordinator.navigationController,
             infoCoordinator.navigationController,
             documentCoordinator.navigationController
+            
         ]
 
         navigationController.viewControllers = [tabBarController]

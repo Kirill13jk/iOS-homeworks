@@ -34,6 +34,8 @@
 		A285EFC32C49472E00910A57 /* LoginViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A285EFC22C49472E00910A57 /* LoginViewControllerDelegate.swift */; };
 		A285EFC82C4A8EC600910A57 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = A285EFC72C4A8EC600910A57 /* iOSIntPackage */; };
 		A285EFCA2C4BE14D00910A57 /* PasswordBruteForcer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A285EFC92C4BE14D00910A57 /* PasswordBruteForcer.swift */; };
+		A287956F2C92E04000A4CC2D /* FavoritePostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A287956E2C92E04000A4CC2D /* FavoritePostsViewController.swift */; };
+		A28795712C92E06200A4CC2D /* FavoriteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28795702C92E06200A4CC2D /* FavoriteCoordinator.swift */; };
 		A2922B4C2C3023F000B681A8 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2922B4B2C3023F000B681A8 /* LoginFactory.swift */; };
 		A2922B4E2C30477600B681A8 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2922B4D2C30477600B681A8 /* LoginInspector.swift */; };
 		A29285E52BF9F4C1000F1271 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29285E42BF9F4C1000F1271 /* PostViewController.swift */; };
@@ -137,6 +139,8 @@
 		A285EFC02C491F4F00910A57 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		A285EFC22C49472E00910A57 /* LoginViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegate.swift; sourceTree = "<group>"; };
 		A285EFC92C4BE14D00910A57 /* PasswordBruteForcer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordBruteForcer.swift; sourceTree = "<group>"; };
+		A287956E2C92E04000A4CC2D /* FavoritePostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePostsViewController.swift; sourceTree = "<group>"; };
+		A28795702C92E06200A4CC2D /* FavoriteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCoordinator.swift; sourceTree = "<group>"; };
 		A2922B4B2C3023F000B681A8 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		A2922B4D2C30477600B681A8 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		A29285E22BF9F492000F1271 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -253,6 +257,7 @@
 				A249CE3A2C6A3AB500AF2A23 /* InfoCoordinator.swift */,
 				A2483F932C78C2FC0024F21A /* YouTubeCoordinator.swift */,
 				A2483F972C7D872C0024F21A /* DocumentCoordinator.swift */,
+				A28795702C92E06200A4CC2D /* FavoriteCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -363,6 +368,7 @@
 			isa = PBXGroup;
 			children = (
 				A29285E42BF9F4C1000F1271 /* PostViewController.swift */,
+				A287956E2C92E04000A4CC2D /* FavoritePostsViewController.swift */,
 				A2B6180D2BFE623F004FAFBB /* PostTableViewCell.swift */,
 			);
 			path = Post;
@@ -556,6 +562,7 @@
 				A285EFBB2C47E80800910A57 /* AppCoordinator.swift in Sources */,
 				A2D44FDD2BF9E8BA00BBE32A /* SceneDelegate.swift in Sources */,
 				A216761A2C5A46AF001C904E /* TrackCoordinator.swift in Sources */,
+				A287956F2C92E04000A4CC2D /* FavoritePostsViewController.swift in Sources */,
 				A249CE3B2C6A3AB500AF2A23 /* InfoCoordinator.swift in Sources */,
 				A285EFCA2C4BE14D00910A57 /* PasswordBruteForcer.swift in Sources */,
 				A285EFBD2C47E9B800910A57 /* ProfileCoordinator.swift in Sources */,
@@ -581,6 +588,7 @@
 				A216762E2C5D0EA9001C904E /* YouTubeViewController.swift in Sources */,
 				A2922B4E2C30477600B681A8 /* LoginInspector.swift in Sources */,
 				A263BAF32C0C739F005EDA68 /* PhotosViewController.swift in Sources */,
+				A28795712C92E06200A4CC2D /* FavoriteCoordinator.swift in Sources */,
 				A2CE87AB2C6398B4003823EB /* NetworkService.swift in Sources */,
 				A29285E92BF9F51C000F1271 /* FeedViewController.swift in Sources */,
 				A2483F962C7D86ED0024F21A /* DocumentsViewController.swift in Sources */,
