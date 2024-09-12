@@ -104,7 +104,7 @@ class PostTableViewCell: UITableViewCell {
         // Устанавливаем текст заголовка поста
         postTitleLabel.text = post.title
         // Устанавливаем текст автора поста
-        postAuthorLabel.text = "Author: \(post.author)"
+        postAuthorLabel.text = "Author: \(String(describing: post.author) ?? <#default value#>)"
         // Устанавливаем текст описания поста
         postDescriptionLabel.text = post.description
         // Устанавливаем режим отображения изображения

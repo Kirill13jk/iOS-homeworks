@@ -36,6 +36,10 @@
 		A285EFCA2C4BE14D00910A57 /* PasswordBruteForcer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A285EFC92C4BE14D00910A57 /* PasswordBruteForcer.swift */; };
 		A287956F2C92E04000A4CC2D /* FavoritePostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A287956E2C92E04000A4CC2D /* FavoritePostsViewController.swift */; };
 		A28795712C92E06200A4CC2D /* FavoriteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28795702C92E06200A4CC2D /* FavoriteCoordinator.swift */; };
+		A28795742C9374BC00A4CC2D /* NSManagedObjectModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A28795722C9374BC00A4CC2D /* NSManagedObjectModel.xcdatamodeld */; };
+		A287957A2C93755F00A4CC2D /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28795792C93755F00A4CC2D /* CoreDataManager.swift */; };
+		A287957D2C93759900A4CC2D /* Post+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A287957B2C93759900A4CC2D /* Post+CoreDataClass.swift */; };
+		A287957E2C93759900A4CC2D /* Post+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A287957C2C93759900A4CC2D /* Post+CoreDataProperties.swift */; };
 		A2922B4C2C3023F000B681A8 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2922B4B2C3023F000B681A8 /* LoginFactory.swift */; };
 		A2922B4E2C30477600B681A8 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2922B4D2C30477600B681A8 /* LoginInspector.swift */; };
 		A29285E52BF9F4C1000F1271 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29285E42BF9F4C1000F1271 /* PostViewController.swift */; };
@@ -141,6 +145,10 @@
 		A285EFC92C4BE14D00910A57 /* PasswordBruteForcer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordBruteForcer.swift; sourceTree = "<group>"; };
 		A287956E2C92E04000A4CC2D /* FavoritePostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePostsViewController.swift; sourceTree = "<group>"; };
 		A28795702C92E06200A4CC2D /* FavoriteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCoordinator.swift; sourceTree = "<group>"; };
+		A28795732C9374BC00A4CC2D /* NSManagedObjectModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NSManagedObjectModel.xcdatamodel; sourceTree = "<group>"; };
+		A28795792C93755F00A4CC2D /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		A287957B2C93759900A4CC2D /* Post+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A287957C2C93759900A4CC2D /* Post+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A2922B4B2C3023F000B681A8 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		A2922B4D2C30477600B681A8 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		A29285E22BF9F492000F1271 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -288,6 +296,8 @@
 		A2D44FCE2BF9E8BA00BBE32A = {
 			isa = PBXGroup;
 			children = (
+				A287957B2C93759900A4CC2D /* Post+CoreDataClass.swift */,
+				A287957C2C93759900A4CC2D /* Post+CoreDataProperties.swift */,
 				A2D44FD92BF9E8BA00BBE32A /* Navigation */,
 				A2F341A42C2193EC00AD0882 /* StorageService */,
 				A2F341B22C2193ED00AD0882 /* StorageServiceTests */,
@@ -370,6 +380,8 @@
 				A29285E42BF9F4C1000F1271 /* PostViewController.swift */,
 				A287956E2C92E04000A4CC2D /* FavoritePostsViewController.swift */,
 				A2B6180D2BFE623F004FAFBB /* PostTableViewCell.swift */,
+				A28795722C9374BC00A4CC2D /* NSManagedObjectModel.xcdatamodeld */,
+				A28795792C93755F00A4CC2D /* CoreDataManager.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -557,12 +569,16 @@
 				A285EFBF2C47E9D500910A57 /* FeedCoordinator.swift in Sources */,
 				A2D44FDF2BF9E8BA00BBE32A /* ViewController.swift in Sources */,
 				A2D44FDB2BF9E8BA00BBE32A /* AppDelegate.swift in Sources */,
+				A287957D2C93759900A4CC2D /* Post+CoreDataClass.swift in Sources */,
+				A287957E2C93759900A4CC2D /* Post+CoreDataProperties.swift in Sources */,
 				A21676162C5113DF001C904E /* AppError.swift in Sources */,
+				A28795742C9374BC00A4CC2D /* NSManagedObjectModel.xcdatamodeld in Sources */,
 				A216761C2C5A49C6001C904E /* TrackViewController.swift in Sources */,
 				A285EFBB2C47E80800910A57 /* AppCoordinator.swift in Sources */,
 				A2D44FDD2BF9E8BA00BBE32A /* SceneDelegate.swift in Sources */,
 				A216761A2C5A46AF001C904E /* TrackCoordinator.swift in Sources */,
 				A287956F2C92E04000A4CC2D /* FavoritePostsViewController.swift in Sources */,
+				A287957A2C93755F00A4CC2D /* CoreDataManager.swift in Sources */,
 				A249CE3B2C6A3AB500AF2A23 /* InfoCoordinator.swift in Sources */,
 				A285EFCA2C4BE14D00910A57 /* PasswordBruteForcer.swift in Sources */,
 				A285EFBD2C47E9B800910A57 /* ProfileCoordinator.swift in Sources */,
@@ -1038,6 +1054,20 @@
 			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		A28795722C9374BC00A4CC2D /* NSManagedObjectModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A28795732C9374BC00A4CC2D /* NSManagedObjectModel.xcdatamodel */,
+			);
+			currentVersion = A28795732C9374BC00A4CC2D /* NSManagedObjectModel.xcdatamodel */;
+			name = NSManagedObjectModel.xcdatamodeld;
+			path = "/Users/prom1/Desktop/iOS-homeworks/Navigation/Post/NSManagedObjectModel.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A2D44FCF2BF9E8BA00BBE32A /* Project object */;
 }
