@@ -1,6 +1,7 @@
 import UIKit
 
 class FavoritesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    weak var coordinator: FavoriteCoordinator?
 
     var tableView: UITableView!
     var favoritePosts: [FavoritePostE] = []

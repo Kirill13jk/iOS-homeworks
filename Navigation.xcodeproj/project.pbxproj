@@ -57,6 +57,7 @@
 		A2CE87A82C6393FE003823EB /* track5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2CE87A32C6393FD003823EB /* track5.mp3 */; };
 		A2CE87A92C6393FE003823EB /* track4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A2CE87A42C6393FD003823EB /* track4.mp3 */; };
 		A2CE87AB2C6398B4003823EB /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CE87AA2C6398B4003823EB /* NetworkService.swift */; };
+		A2D07D772C9595A5007FDCE1 /* FavoriteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D07D762C9595A5007FDCE1 /* FavoriteCoordinator.swift */; };
 		A2D44FDB2BF9E8BA00BBE32A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D44FDA2BF9E8BA00BBE32A /* AppDelegate.swift */; };
 		A2D44FDD2BF9E8BA00BBE32A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D44FDC2BF9E8BA00BBE32A /* SceneDelegate.swift */; };
 		A2D44FDF2BF9E8BA00BBE32A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D44FDE2BF9E8BA00BBE32A /* ViewController.swift */; };
@@ -166,6 +167,7 @@
 		A2CE87A32C6393FD003823EB /* track5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = track5.mp3; sourceTree = SOURCE_ROOT; };
 		A2CE87A42C6393FD003823EB /* track4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = track4.mp3; sourceTree = SOURCE_ROOT; };
 		A2CE87AA2C6398B4003823EB /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		A2D07D762C9595A5007FDCE1 /* FavoriteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCoordinator.swift; sourceTree = "<group>"; };
 		A2D44FD72BF9E8BA00BBE32A /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2D44FDA2BF9E8BA00BBE32A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2D44FDC2BF9E8BA00BBE32A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				A249CE3A2C6A3AB500AF2A23 /* InfoCoordinator.swift */,
 				A2483F932C78C2FC0024F21A /* YouTubeCoordinator.swift */,
 				A2483F972C7D872C0024F21A /* DocumentCoordinator.swift */,
+				A2D07D762C9595A5007FDCE1 /* FavoriteCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				A27BA0142C9592B70024F802 /* CoreDataManager.swift in Sources */,
 				A285EFC12C491F4F00910A57 /* LoginCoordinator.swift in Sources */,
 				A2A6BC1E2C3C09E400A91E69 /* FeedModel.swift in Sources */,
+				A2D07D772C9595A5007FDCE1 /* FavoriteCoordinator.swift in Sources */,
 				A2F341CE2C2405CB00AD0882 /* UserService.swift in Sources */,
 				A2483F942C78C2FC0024F21A /* YouTubeCoordinator.swift in Sources */,
 				A29285E52BF9F4C1000F1271 /* PostViewController.swift in Sources */,
