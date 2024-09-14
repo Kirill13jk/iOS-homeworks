@@ -2,6 +2,11 @@ import UIKit
 import StorageService
 import iOSIntPackage
 
+protocol PostTableViewCellDelegate: AnyObject {
+    func postTableViewCellDidDoubleTap(_ cell: PostTableViewCell)
+}
+
+
 class PostTableViewCell: UITableViewCell {
     // Создаем UILabel для отображения заголовка поста
     let postTitleLabel = UILabel()
@@ -15,6 +20,8 @@ class PostTableViewCell: UITableViewCell {
     let postLikesLabel = UILabel()
     // Создаем UILabel для отображения количества просмотров
     let postViewsLabel = UILabel()
+    
+    weak var delegate: PostTableViewCellDelegate?
 
     // Инициализатор для создания ячейки в коде
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -95,10 +102,19 @@ class PostTableViewCell: UITableViewCell {
             postViewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
 
+        // Добавляем распознаватель двойного нажатия
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap))
+        doubleTapGesture.numberOfTapsRequired = 2
+        self.addGestureRecognizer(doubleTapGesture)
+        
         // Устанавливаем цвет текста для postDescriptionLabel
         postDescriptionLabel.textColor = UIColor.gray
     }
 
+    @objc private func handleDoubleTap() {
+        delegate?.postTableViewCellDidDoubleTap(self)
+    }
+    
     // Метод для конфигурации ячейки с данными поста
     func configure(with post: Post) {
         // Устанавливаем текст заголовка поста
