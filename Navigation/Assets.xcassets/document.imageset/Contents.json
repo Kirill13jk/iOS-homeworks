@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "file-earmark-frame.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

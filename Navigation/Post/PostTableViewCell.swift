@@ -2,7 +2,15 @@ import UIKit
 import StorageService
 import iOSIntPackage
 
+protocol PostTableViewCellDelegate: AnyObject {
+    func postTableViewCellDidDoubleTap(_ cell: PostTableViewCell)
+    func postTableViewCellDidTapFavoriteButton(_ cell: PostTableViewCell)
+}
+
 class PostTableViewCell: UITableViewCell {
+    
+    let favoriteButton = UIButton()
+
     // Создаем UILabel для отображения заголовка поста
     let postTitleLabel = UILabel()
     // Создаем UILabel для отображения автора поста
@@ -15,6 +23,8 @@ class PostTableViewCell: UITableViewCell {
     let postLikesLabel = UILabel()
     // Создаем UILabel для отображения количества просмотров
     let postViewsLabel = UILabel()
+    
+    weak var delegate: PostTableViewCellDelegate?
 
     // Инициализатор для создания ячейки в коде
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -45,6 +55,27 @@ class PostTableViewCell: UITableViewCell {
         contentView.addSubview(postDescriptionLabel)
         contentView.addSubview(postLikesLabel)
         contentView.addSubview(postViewsLabel)
+        
+        // Отключаем автоматические ограничения для favoriteButton
+        favoriteButton.translatesAutoresizingMaskIntoConstraints = false
+
+        // Устанавливаем изображение для кнопки
+        favoriteButton.setImage(UIImage(systemName: "star"), for: .normal)
+        favoriteButton.tintColor = .systemBlue
+
+        // Добавляем обработчик нажатия
+        favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
+
+        // Добавляем кнопку в contentView
+        contentView.addSubview(favoriteButton)
+
+        // Устанавливаем ограничения для favoriteButton
+        NSLayoutConstraint.activate([
+            favoriteButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            favoriteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            favoriteButton.widthAnchor.constraint(equalToConstant: 24),
+            favoriteButton.heightAnchor.constraint(equalToConstant: 24),
+        ])
 
         // Устанавливаем ограничения для postImageView
         NSLayoutConstraint.activate([
@@ -55,78 +86,73 @@ class PostTableViewCell: UITableViewCell {
                 postImageView.heightAnchor.constraint(equalToConstant: 240),
 
             // Устанавливаем ограничения для postTitleLabel
-            // Верхний отступ от нижней части postImageView
             postTitleLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: 16),
-            // Левый отступ от contentView
             postTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            // Правый отступ от contentView
             postTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
 
             // Устанавливаем ограничения для postAuthorLabel
-            // Верхний отступ от нижней части postTitleLabel
             postAuthorLabel.topAnchor.constraint(equalTo: postTitleLabel.bottomAnchor, constant: 16),
-            // Левый отступ от contentView
             postAuthorLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            // Правый отступ от contentView
             postAuthorLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
 
             // Устанавливаем ограничения для postDescriptionLabel
-            // Верхний отступ от нижней части postAuthorLabel
             postDescriptionLabel.topAnchor.constraint(equalTo: postAuthorLabel.bottomAnchor, constant: 16),
-            // Левый отступ от contentView
             postDescriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            // Правый отступ от contentView
             postDescriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
 
             // Устанавливаем ограничения для postLikesLabel
-            // Верхний отступ от нижней части postDescriptionLabel
             postLikesLabel.topAnchor.constraint(equalTo: postDescriptionLabel.bottomAnchor, constant: 16),
-            // Левый отступ от contentView
             postLikesLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
 
             // Устанавливаем ограничения для postViewsLabel
-            // Верхний отступ от нижней части postDescriptionLabel
             postViewsLabel.topAnchor.constraint(equalTo: postDescriptionLabel.bottomAnchor, constant: 16),
-            // Левый отступ от правой части postLikesLabel
             postViewsLabel.leadingAnchor.constraint(equalTo: postLikesLabel.trailingAnchor, constant: 10),
-            // Правый отступ от contentView
             postViewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            // Нижний отступ от нижней части contentView
             postViewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ])
 
-        // Устанавливаем цвет текста для postDescriptionLabel
+        // Добавляем распознаватель двойного нажатия
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap))
+        doubleTapGesture.numberOfTapsRequired = 2
+        self.addGestureRecognizer(doubleTapGesture)
+        
         postDescriptionLabel.textColor = UIColor.gray
+    }
+    
+    @objc private func favoriteButtonTapped() {
+        delegate?.postTableViewCellDidTapFavoriteButton(self)
+    }
+
+    @objc private func handleDoubleTap() {
+        delegate?.postTableViewCellDidDoubleTap(self)
     }
 
     // Метод для конфигурации ячейки с данными поста
-    func configure(with post: Post) {
-        // Устанавливаем текст заголовка поста
+    func configure(with post: Post, isFavorite: Bool) {
         postTitleLabel.text = post.title
-        // Устанавливаем текст автора поста
         postAuthorLabel.text = "Author: \(post.author)"
-        // Устанавливаем текст описания поста
         postDescriptionLabel.text = post.description
-        // Устанавливаем режим отображения изображения
         postImageView.contentMode = .scaleAspectFill
-        // Устанавливаем текст количества лайков
         postLikesLabel.text = "Likes: \(post.likes)"
-        // Устанавливаем текст количества просмотров
         postViewsLabel.text = "Views: \(post.views)"
 
-        // Если у поста есть изображение, применяем фильтр
+        // Применение фильтра для изображения
         if let image = post.image {
             applyFilter(to: image)
+        }
+
+        // Установка состояния кнопки "Избранное"
+        if isFavorite {
+            favoriteButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+        } else {
+            favoriteButton.setImage(UIImage(systemName: "star"), for: .normal)
         }
     }
 
     // Метод для применения фильтра к изображению
     private func applyFilter(to image: UIImage) {
-        // Создаем экземпляр процессора изображений
         let processor = ImageProcessor()
-        // Применяем фильтр и обрабатываем изображение асинхронно
         processor.processImage(sourceImage: image, filter: .chrome, completion: { processedImage in
-            // Обновляем изображение в UIImageView на главном потоке
             DispatchQueue.main.async {
                 self.postImageView.image = processedImage
             }
