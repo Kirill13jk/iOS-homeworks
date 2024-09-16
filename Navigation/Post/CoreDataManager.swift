@@ -5,9 +5,8 @@ class CoreDataManager {
     static let shared = CoreDataManager()
     private init() {}
     
-    // Инициализация NSPersistentContainer
     lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Model") // Имя должно совпадать с именем вашего .xcdatamodeld файла
+        let container = NSPersistentContainer(name: "Model") // Замените "Model" на имя вашей модели
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Не удалось загрузить хранилище данных: \(error), \(error.userInfo)")
@@ -21,9 +20,13 @@ class CoreDataManager {
         return persistentContainer.viewContext
     }
     
+    // Фоновой конекст
+    var backgroundContext: NSManagedObjectContext {
+        return persistentContainer.newBackgroundContext()
+    }
+    
     // Метод для сохранения контекста
-    func saveContext () {
-        let context = persistentContainer.viewContext
+    func saveContext (context: NSManagedObjectContext) {
         if context.hasChanges {
             do {
                 try context.save()

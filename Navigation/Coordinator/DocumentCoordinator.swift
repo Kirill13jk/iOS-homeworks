@@ -7,7 +7,7 @@ class DocumentCoordinator: Coordinator {
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.navigationController.tabBarItem = UITabBarItem(title: "Document", image: UIImage(named: "image-alt"), tag: 2)
+        self.navigationController.tabBarItem = UITabBarItem(title: "Document", image: UIImage(named: "document"), tag: 2)
     }
 
     // Запуск координатора ленты новостей

@@ -2,7 +2,16 @@ import UIKit
 import CoreData
 import StorageService
 
-class PostsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PostTableViewCellDelegate {
+class PostViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, PostTableViewCellDelegate {
+    func postTableViewCellDidTapFavoriteButton(_ cell: PostTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let post = posts[indexPath.row]
+        savePostToFavorites(post)
+        
+        // Обновляем иконку на кнопке избранного
+        cell.favoriteButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+    }
+    
     
     var tableView: UITableView!
     var posts: [Post] = [] // Массив постов
@@ -32,8 +41,6 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     // Метод для загрузки постов
     func loadPosts() {
-        // Здесь вы должны загрузить ваши посты в массив posts
-        // Например, если у вас есть функция получения постов из StorageService
         posts = Post.makeMockPosts()
         tableView.reloadData()
     }
@@ -48,10 +55,27 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableViewCell
         let post = posts[indexPath.row]
-        cell.configure(with: post)
+        let isFavorite = isPostInFavorites(post)
+        cell.configure(with: post, isFavorite: isFavorite)
+
         cell.delegate = self // Устанавливаем делегата
         return cell
     }
+    
+    func isPostInFavorites(_ post: Post) -> Bool {
+        let backgroundContext = CoreDataManager.shared.backgroundContext
+        let fetchRequest: NSFetchRequest<FavoritePostE> = FavoritePostE.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "title == %@ AND author == %@", post.title, post.author)
+
+        do {
+            let results = try backgroundContext.fetch(fetchRequest)
+            return !results.isEmpty
+        } catch {
+            print("Ошибка при проверке избранного: \(error)")
+            return false
+        }
+    }
+
 
     // MARK: - PostTableViewCellDelegate метод
 
@@ -63,36 +87,41 @@ class PostsViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     // Метод для сохранения поста в избранное
     func savePostToFavorites(_ post: Post) {
-        let context = CoreDataManager.shared.context
+        let backgroundContext = CoreDataManager.shared.backgroundContext
 
-        // Проверяем, нет ли уже этого поста в избранном
-        let fetchRequest: NSFetchRequest<FavoritePostE> = FavoritePostE.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "title == %@ AND author == %@", post.title, post.author)
+        backgroundContext.perform {
+            // Проверяем, нет ли уже этого поста в избранном
+            let fetchRequest: NSFetchRequest<Navigation.FavoritePostE> = Navigation.FavoritePostE.fetchRequest()
 
-        do {
-            let results = try context.fetch(fetchRequest)
-            if results.isEmpty {
-                // Создаем новый объект FavoritePostE
-                let favoritePost = FavoritePostE(context: context)
-                favoritePost.title = post.title
-                favoritePost.author = post.author
-                favoritePost.content = post.description
-                favoritePost.likes = Int64(post.likes)
-                favoritePost.views = Int64(post.views)
-                if let image = post.image {
-                    favoritePost.imageData = image.pngData()
+            fetchRequest.predicate = NSPredicate(format: "title == %@ AND author == %@", post.title, post.author)
+
+            do {
+                let results: [Navigation.FavoritePostE] = try backgroundContext.fetch(fetchRequest)
+
+                if results.isEmpty {
+                    // Создаем новый объект FavoritePostE
+                    let favoritePost = FavoritePostE(context: backgroundContext)
+                    favoritePost.title = post.title
+                    favoritePost.author = post.author
+                    favoritePost.content = post.description
+                    favoritePost.likes = Int64(post.likes)
+                    favoritePost.views = Int64(post.views)
+                    if let image = post.image {
+                        favoritePost.imageData = image.pngData()
+                    }
+
+                    // Сохраняем контекст
+                    try backgroundContext.save()
+                    print("Пост сохранён в избранное")
+                } else {
+                    print("Пост уже находится в избранном")
                 }
-
-                // Сохраняем контекст
-                CoreDataManager.shared.saveContext()
-                print("Пост сохранён в избранное")
-            } else {
-                print("Пост уже находится в избранном")
+            } catch {
+                print("Ошибка при сохранении поста: \(error)")
             }
-        } catch {
-            print("Ошибка при сохранении поста: \(error)")
         }
     }
+
 
     // MARK: - UITableViewDelegate методы (если нужны)
 
