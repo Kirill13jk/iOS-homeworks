@@ -1,10 +1,31 @@
 import UIKit
 import FirebaseAuth
 import StorageService
+import CoreData
 
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, PostTableViewCellDelegate {
+
+    // Метод делегата для обработки двойного нажатия на ячейку
+    func postTableViewCellDidDoubleTap(_ cell: PostTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let post = posts[indexPath.row]
+        savePostToFavorites(post)  // Сохраняем пост в избранное по двойному тапу
+        // Обновляем иконку после добавления в избранное
+        cell.favoriteButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+    }
+    
+    // Метод делегата для нажатия на кнопку избранного
+    func postTableViewCellDidTapFavoriteButton(_ cell: PostTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let post = posts[indexPath.row]
+        savePostToFavorites(post)
+        // Обновляем иконку
+        cell.favoriteButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+    }
+    
     weak var coordinator: ProfileCoordinator?
+    private var posts: [Post] = []
 
     private let tableView = UITableView()
     private let profileHeaderView = ProfileHeaderView()
@@ -13,6 +34,14 @@ class ProfileViewController: UIViewController {
     private var avatarOriginalFrame: CGRect?
     private var enlargedAvatarImageView: UIImageView?
     var user: User?
+    
+    let favoriteButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "star"), for: .normal)
+        button.tintColor = .systemYellow
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView()
@@ -43,7 +72,44 @@ class ProfileViewController: UIViewController {
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: "PhotosCell")
 
         NotificationCenter.default.addObserver(self, selector: #selector(handleAvatarTapped(_:)), name: NSNotification.Name("AvatarTapped"), object: nil)
+        
+        loadPosts()
+        
     }
+    
+    
+    
+    func savePostToFavorites(_ post: Post) {
+        let backgroundContext = CoreDataManager.shared.backgroundContext
+
+        backgroundContext.perform {
+            let fetchRequest: NSFetchRequest<FavoritePostE> = FavoritePostE.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "title == %@ AND author == %@", post.title, post.author)
+
+            do {
+                let results = try backgroundContext.fetch(fetchRequest)
+                if results.isEmpty {
+                    let favoritePost = FavoritePostE(context: backgroundContext)
+                    favoritePost.title = post.title
+                    favoritePost.author = post.author
+                    favoritePost.content = post.description
+                    favoritePost.likes = Int64(post.likes)
+                    favoritePost.views = Int64(post.views)
+                    if let image = post.image {
+                        favoritePost.imageData = image.pngData()
+                    }
+
+                    try backgroundContext.save()
+                    print("Пост сохранён в избранное")
+                } else {
+                    print("Пост уже находится в избранном")
+                }
+            } catch {
+                print("Ошибка при сохранении поста: \(error)")
+            }
+        }
+    }
+
     
     private func setupLogoutButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(logOutTapped))
@@ -185,10 +251,37 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
                 return UITableViewCell()
             }
             let post = posts[indexPath.row]
-            cell.configure(with: post)
+            let isFavorite = isPostInFavorites(post)
+            
+            cell.configure(with: post, isFavorite: isFavorite)
+            cell.delegate = self
+
+            // Проверяем, находится ли пост в избранном, и обновляем иконку
+            if isPostInFavorites(post) {
+                cell.favoriteButton.setImage(UIImage(systemName: "star.fill"), for: .normal)
+            } else {
+                cell.favoriteButton.setImage(UIImage(systemName: "star"), for: .normal)
+            }
+
             return cell
         }
     }
+    
+    func isPostInFavorites(_ post: Post) -> Bool {
+        let context = CoreDataManager.shared.context
+        let fetchRequest: NSFetchRequest<FavoritePostE> = FavoritePostE.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "title == %@ AND author == %@", post.title, post.author)
+
+        do {
+            let results = try context.fetch(fetchRequest)
+            return !results.isEmpty
+        } catch {
+            print("Ошибка при проверке избранного: \(error)")
+            return false
+        }
+    }
+
+
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return nil
@@ -204,4 +297,10 @@ extension ProfileViewController: UITableViewDelegate, UITableViewDataSource {
             navigationController?.pushViewController(photoGalleryVC, animated: true)
         }
     }
+    
+    private func loadPosts() {
+        posts = Post.makeMockPosts() 
+        tableView.reloadData()
+    }
+
 }
